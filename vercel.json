@@ -1,4 +1,5 @@
 {
   "name": "andyruwruw-readme",
   "version": 1,
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/$1" }]
 }

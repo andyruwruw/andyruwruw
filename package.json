@@ -1,0 +1,27 @@
+{
+  "name": "andyruwruw-profile-page",
+  "version": "1.0.0",
+  "description": "Github profile README.md",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andyruwruw/andyruwruw.git"
+  },
+  "author": "Andrew Young",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andyruwruw/andyruwruw/issues"
+  },
+  "homepage": "https://github.com/andyruwruw/andyruwruw#readme",
+  "dependencies": {
+    "@vercel/node": "^1.7.3",
+    "isomorphic-unfetch": "^3.0.0",
+    "querystring": "^0.2.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "typescript": "^3.9.7"
+  }
+}

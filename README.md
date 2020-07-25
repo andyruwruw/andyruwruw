@@ -15,5 +15,5 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 <a href="https://andyruwruw.vercel.app/api/now-playing?open">
-<img src="https://andyruwruw.vercel.app/api/now-playing">
+  <img src="https://andyruwruw.vercel.app/api/now-playing">
 </a>

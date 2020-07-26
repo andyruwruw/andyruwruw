@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <i>tempo and color of the bars are determined by the track's tempo, energy, danceability and happiness</i>
+  <i>music bars move to the tempo of the song and have colors based on the track's tempo, energy, danceability and happiness!</i>
 </p>
  
 <p align="center">

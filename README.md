@@ -4,8 +4,10 @@ hello! here's a little about me:
   i really like music :headphones:
 </h1>
 
+<!-- Nothing weird to see here -->
 <p align="center">
   <a href="https://andyruwruw.vercel.app/api/now-playing?open">
+    <!-- Music bars move to the beat and are colored based on the track's happiness, danceability and energy! -->
     <img src="https://andyruwruw.vercel.app/api/now-playing">
   </a>
 </p>
@@ -15,6 +17,7 @@ hello! here's a little about me:
 </p>
  
 <p align="center">
+  <!-- He came up with the idea of HOW to show React components as an img on a README.md and the now playing component! -->
   <i>inspired by <a href="https://github.com/natemoo-re">natemoo-re</a></i>
 </p>
 

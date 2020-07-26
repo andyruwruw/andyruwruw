@@ -1,3 +1,5 @@
+### Hello! Here's a little about me:
+
 <h1>
   i really like music :headphones:
 </h1>
@@ -10,10 +12,6 @@
 
 <p align="center">
   <img src="https://andyruwruw.vercel.app/api/top-played">
-</p>
-
-<p align="center">
-  <i>music bars move to the tempo of the song and have colors based on the track's tempo, energy, danceability and happiness!</i>
 </p>
  
 <p align="center">
@@ -33,7 +31,7 @@
 </p>
 
 <p align="center">
-  <i>luckily being good at chess isn't a pre-req to the job!</i>
+  <i>luckily being good at chess isn't a pre-req to the job</i>
 </p>
 
 <p align="center">

@@ -12,14 +12,18 @@
 - ⚡ Fun fact: ...
 -->
 <!-- 
-
 # i'm a vue.js fanboy -->
-# i'm a front-end intern for chess.com ♜
+
+# i'm a front-end intern for chess.com ♟️
 
 <p align="center">
   <a href="https://www.chess.com/member/andyruwruw">
     <img src="https://andyruwruw.vercel.app/api/chess-games">
   </a>
+</p>
+
+<p align="center">
+  Being good at chess isn't a pre-req :stuck_out_tongue_winking_eye:
 </p>
 
 # i really like music :guitar:

@@ -14,6 +14,9 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+
+## I really like music.
+
 <a href="https://andyruwruw.vercel.app/api/now-playing?open">
   <img src="https://andyruwruw.vercel.app/api/now-playing">
 </a>

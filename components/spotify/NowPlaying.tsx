@@ -1,6 +1,6 @@
-import React from "react";
-import ReadMeImg from "./ReadMeImg";
-import Text from "./Text";
+import React from 'react';
+import ReadMeImg from '../ReadMeImg';
+import Text from '../Text';
 
 export interface Props {
   cover?: string;
@@ -20,7 +20,9 @@ export const Player: React.FC<Props> = ({
   isPlaying,
 }) => {
   return (
-    <ReadMeImg width="256" height="64">
+    <ReadMeImg
+      width="256"
+      height="64">
       <style>
         {`
             .paused { 
@@ -122,9 +124,13 @@ export const Player: React.FC<Props> = ({
           alignItems: "center",
           paddingTop: 8,
           paddingLeft: 4,
-        }}
-      >
-        <img id="cover" src={cover ?? null} width="48" height="48" />
+        }}>
+        <img
+          id="cover"
+          src={cover ?? null}
+          width="48"
+          height="48" />
+
         <div
           style={{
             display: "flex",
@@ -132,17 +138,23 @@ export const Player: React.FC<Props> = ({
             flexDirection: "column",
             marginTop: -4,
             marginLeft: 8,
-          }}
-        >
-          <Text id="track" weight="bold">
+          }}>
+          <Text
+            id="track"
+            weight="bold">
             {`${track ?? ""} `.trim()}
           </Text>
-          <Text id="artist" color={!track ? "gray" : undefined}>
+
+          <Text
+            id="artist"
+            color={!track ? "gray" : undefined}>
             {artist || "Nothing playing..."}
           </Text>
           {track && (
             <div className="progress-bar">
-              <div id="progress" className={!isPlaying ? "paused" : ""} />
+              <div
+                id="progress"
+                className={!isPlaying ? "paused" : ""} />
             </div>
           )}
         </div>

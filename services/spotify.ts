@@ -28,10 +28,9 @@ async function getAuthorizationToken() {
   return `Bearer ${response.access_token}`;
 }
 
-const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
 export async function nowPlaying() {
   const Authorization = await getAuthorizationToken();
-  const response = await fetch(NOW_PLAYING_ENDPOINT, {
+  const response = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
     headers: {
       Authorization,
     },
@@ -42,5 +41,21 @@ export async function nowPlaying() {
   } else if (status === 200) {
     const data = await response.json();
     return data;
+  }
+}
+
+export async function topPlayed(timeRange) {
+  const Authorization = await getAuthorizationToken();
+  const response = await fetch(`https://api.spotify.com/v1/me/top/tracks?limit=5&time_range=${timeRange}`, {
+    headers: {
+      Authorization,
+    },
+  });
+  const { status } = response;
+  if (status === 204) {
+    return [];
+  } else if (status === 200) {
+    const data = await response.json();
+    return data.items;
   }
 }

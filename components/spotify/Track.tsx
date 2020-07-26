@@ -3,7 +3,6 @@ import React from "react";
 const sizes = {
   default: 14,
   small: 12,
-  title: 18,
 };
 
 const colors = {
@@ -24,7 +23,7 @@ const weights = {
   bold: 600,
 };
 
-const Text: React.FC<any> = ({
+const Track: React.FC<any> = ({
   children = "",
   weight = "default",
   family = "default",
@@ -49,4 +48,4 @@ const Text: React.FC<any> = ({
   );
 };
 
-export default Text;
+export default Track;

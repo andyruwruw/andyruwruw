@@ -35,10 +35,10 @@ export const CurrentGames: React.FC<Props> = ({
             align-items: center;
             width: 22px;
             height: 22px;
-            background: #B58863;
+            background: rgba(125, 135, 150, .8);
           }
           .col.light {
-            background: #F0D9B5;
+            background: rgba(232, 235, 239, .8);
           }
           .col img {
             width: 90%;

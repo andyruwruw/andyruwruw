@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const ReadMeImg: React.StatelessComponent<{ width: String, height: String }> = ({ children, width, height }) => (
   <svg

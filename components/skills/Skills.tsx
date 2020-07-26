@@ -2,21 +2,21 @@ import React from 'react';
 
 import ReadMeImg from '../ReadMeImg';
 
-import CIcon from './icons/c';
-import CPlusPlusIcon from './icons/cplusplus';
-import CSSIcon from './icons/css';
-import GitIcon from './icons/git';
-import HTMLIcon from './icons/html';
-import JavaIcon from './icons/java';
-import JSIcon from './icons/js';
-import MongoIcon from './icons/mongo';
-import NGINXIcon from './icons/nginx';
-import NodeIcon from './icons/node';
-import PythonIcon from './icons/python';
-import ReactIcon from './icons/react';
-import SassIcon from './icons/sass';
-import TSIcon from './icons/ts';
-import VueIcon from './icons/vue';
+import CIcon from '../icons/c';
+import CPlusPlusIcon from '../icons/cplusplus';
+import CSSIcon from '../icons/css';
+import GitIcon from '../icons/git';
+import HTMLIcon from '../icons/html';
+import JavaIcon from '../icons/java';
+import JSIcon from '../icons/js';
+import MongoIcon from '../icons/mongo';
+import NGINXIcon from '../icons/nginx';
+import NodeIcon from '../icons/node';
+import PythonIcon from '../icons/python';
+import ReactIcon from '../icons/react';
+import SassIcon from '../icons/sass';
+import TSIcon from '../icons/ts';
+import VueIcon from '../icons/vue';
 
 export interface Props {};
 

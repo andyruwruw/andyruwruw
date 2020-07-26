@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from '@vercel/node';
 import { renderToString } from 'react-dom/server';
 
-import { Skills } from '../components/general/Skills';
+import { Skills } from '../components/skills/Skills';
 
 export default async function (req: NowRequest, res: NowResponse) {
   res.setHeader('Content-Type', 'image/svg+xml');

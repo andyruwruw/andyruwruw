@@ -11,11 +11,11 @@
 </p>
 
 <p align="center">
-  **tempo and color of the bars are determined by the track's tempo, energy, danceability and happiness**
+  <i>tempo and color of the bars are determined by the track's tempo, energy, danceability and happiness</i>
 </p>
 
 <p align="center">
-  **inspired by <a href="https://github.com/natemoo-re">natemoo-re</a> :raised_hands:**
+  <i>inspired by <a href="https://github.com/natemoo-re">natemoo-re</a> :raised_hands:</i>
 </p>
 
 # i'm a frontend intern at chess.com ♟️
@@ -27,7 +27,7 @@
 </p>
 
 <p align="center">
-  **luckily being good at chess isn't a pre-req :stuck_out_tongue_winking_eye:**
+  <i>luckily being good at chess isn't a pre-req :stuck_out_tongue_winking_eye:</i>
 </p>
 
 # i'm a vue.js fanboy, but i do some other stuff too :hammer:

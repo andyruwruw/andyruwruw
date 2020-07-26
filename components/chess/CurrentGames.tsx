@@ -76,7 +76,7 @@ export const CurrentGames: React.FC<Props> = ({
                 <div
                   key={`chess-game-${gameIndex}=row-${rowIndex}-col-${colIndex}`}
                   className={(rowIndex + colIndex) % 2 === (game.isWhite ? 0 : 1) ? 'col light' : 'col'}>
-                  {col && <img src={`../../assets/${col === col.toUpperCase() ? 'white' : 'black'}-${col.toLowerCase()}.png`}></img>}
+                  {col && <img src={`https://raw.githubusercontent.com/andyruwruw/andyruwruw/master/assets/${col === col.toUpperCase() ? 'white' : 'black'}-${col.toLowerCase()}.png`}></img>}
                 </div>
                 ))}
               </div>

@@ -1,4 +1,4 @@
-<h1 align="center">
+<h1>
   i really like music :headphones:
 </h1>
 
@@ -20,7 +20,9 @@
   <i>inspired by <a href="https://github.com/natemoo-re">natemoo-re</a> :raised_hands:</i>
 </p>
 
-<h1 align="center">
+<p></p>
+
+<h1>
   i'm a frontend intern at chess.com ♟️
 </h1>
 
@@ -34,7 +36,9 @@
   <i>luckily being good at chess isn't a pre-req :stuck_out_tongue_winking_eye:</i>
 </p>
 
-<h1 align="center">
+<p></p>
+
+<h1>
   i'm a vue.js fanboy, but i do some other stuff too :hammer:
 </h1>
 

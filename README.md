@@ -15,10 +15,17 @@ Here are some ideas to get you started:
 - ⚡ Fun fact: ...
 -->
 
-## I really like music.
+# I really like music.
+<p align="center">
+Currently jamming out to:
+</p>
 
-<a href="https://andyruwruw.vercel.app/api/now-playing?open">
-  <img src="https://andyruwruw.vercel.app/api/now-playing">
-</a>
+<p align="center">
+  <a href="https://andyruwruw.vercel.app/api/now-playing?open">
+    <img src="https://andyruwruw.vercel.app/api/now-playing">
+  </a>
+</p>
 
-<img src="https://andyruwruw.vercel.app/api/top-played">
+<p align="center">
+  <img src="https://andyruwruw.vercel.app/api/top-played">
+</p>

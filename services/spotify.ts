@@ -42,7 +42,28 @@ async function getAuthorizationToken() {
  */
 export async function nowPlaying() {
   const Authorization = await getAuthorizationToken();
-  const response = await fetch(`https://api.spotify.com/v1/me/player/currently-playing`, {
+  const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+    headers: {
+      Authorization,
+    },
+  });
+  const { status } = response;
+  if (status === 204) {
+    return {};
+  } else if (status === 200) {
+    const data = await response.json();
+    data.Authorization = Authorization;
+    return data;
+  }
+};
+
+/**
+ * Retrieve Audio Features
+ * Requests a track's audio features from spotify
+ * @returns {Object} Audio Features Object
+ */
+export async function trackAudioFeatures(id, Authorization) {
+  const response = await fetch(`https://api.spotify.com/v1/audio-features/${id}`, {
     headers: {
       Authorization,
     },
@@ -54,7 +75,7 @@ export async function nowPlaying() {
     const data = await response.json();
     return data;
   }
-}
+};
 
 /**
  * Retrieve Top Played
@@ -76,4 +97,4 @@ export async function topPlayed(timeRange) {
     const data = await response.json();
     return data.items;
   }
-}
+};

@@ -10,6 +10,7 @@ export interface Props {
   progress: number;
   duration: number;
   isPlaying: boolean;
+  audioFeatures: Object;
 }
 
 export const Player: React.FC<Props> = ({
@@ -19,13 +20,39 @@ export const Player: React.FC<Props> = ({
   progress,
   duration,
   isPlaying,
+  audioFeatures,
 }) => {
   return (
     <ReadMeImg
-      width="256"
+      width="466"
       height="125">
       <style>
         {`
+          .now-playing-wrapper {
+            display: flex;
+            justify-content: center;
+          }
+          .bar-container {
+            width: 111px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+          .bar-container.right {
+            align-items: flex-start;
+          }
+          .bar-container.left {
+            align-items: flex-end;
+          }
+          .bar {
+            --offset: 0;
+            height: 10px;
+            width: 50px;
+            background: rgba(${audioFeatures.energy * 255}, ${audioFeatures.valence * 255}, ${audioFeatures.danceability * 255}, .7);
+            margin: 2px 0;
+            animation: bars ${(audioFeatures.tempo / 60) * 1}s ease calc(var(--offset) * -.5s) infinite;
+          }
+          
           .paused { 
             animation-play-state: paused !important;
             background: #e1e4e8 !important;
@@ -62,7 +89,6 @@ export const Player: React.FC<Props> = ({
             animation: progress ${duration}ms linear;
             animation-delay: -${progress}ms;
           }
-          
           .progress-bar,
           #track,
           #artist,
@@ -73,7 +99,7 @@ export const Player: React.FC<Props> = ({
           }
           #track,
           #artist {
-            width: 180px;
+            width: 170px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -129,6 +155,17 @@ export const Player: React.FC<Props> = ({
               transform: scaleX(1)
             }
           }
+          @keyframes bars {
+            0% {
+              width: 25%;
+            }
+            50% {
+              width: 90%;
+            }
+            100% {
+              width: 25%;
+            }
+          }
         `}
       </style>
       <Text
@@ -137,52 +174,73 @@ export const Player: React.FC<Props> = ({
         size="title">
         currently jamming to
       </Text>
-
-      <div
-        className={isPlaying ? "disabled" : ""}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          paddingTop: 8,
-          paddingLeft: 4,
-          background: "rgb(0,0,0,.01)",
-          borderRadius: ".3rem",
-          margin: ".5rem",
-          padding: ".5rem",
-          border: "1px solid rgb(0,0,0,.1)",
-        }}>
-        <img
-          id="cover"
-          src={cover ?? null}
-          width="48"
-          height="48" />
+      <div className="now-playing-wrapper">
+        <div className="bar-container left">
+          {[0, 1, 2].map((bar) => (
+            <div className="bar"
+              key={`left-bar-${bar}`}
+              style={{
+                '--offset': bar,
+              }}/>
+          ))}
+        </div>
 
         <div
+          className={isPlaying ? "disabled" : ""}
           style={{
             display: "flex",
-            flex: 1,
-            flexDirection: "column",
-            marginTop: -4,
-            marginLeft: 8,
+            alignItems: "center",
+            paddingTop: 8,
+            paddingLeft: 4,
+            background: "rgb(0,0,0,.01)",
+            borderRadius: ".3rem",
+            margin: ".5rem 0",
+            padding: ".5rem",
+            border: "1px solid rgb(0,0,0,.1)",
           }}>
-          <Text
-            id="track"
-            weight="bold">
-            {`${track ?? ""} `.trim()}
-          </Text>
+          <img
+            id="cover"
+            src={cover ?? null}
+            width="48"
+            height="48" />
 
-          <Text
-            id="artist"
-            color={!track ? "gray" : undefined}>
-            {artist || "Nothing playing..."}
-          </Text>
-          {track && (
-            <div className="progress-bar">
-              <div
-                id="progress"
-                className={!isPlaying ? "paused" : ""} />
-            </div>
-          )}
+          <div
+            style={{
+              display: "flex",
+              flex: 1,
+              flexDirection: "column",
+              marginTop: -4,
+              marginLeft: 8,
+            }}>
+            <Text
+              id="track"
+              weight="bold">
+              {`${track ?? ""} `.trim()}
+            </Text>
+
+            <Text
+              id="artist"
+              color={!track ? "gray" : undefined}>
+              {artist || "Nothing playing..."}
+            </Text>
+            {track && (
+              <div className="progress-bar">
+                <div
+                  id="progress"
+                  className={!isPlaying ? "paused" : ""} />
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="bar-container right">
+          {[0, 1, 2].map((bar) => (
+            <div className="bar"
+              key={`right-bar-${bar}`}
+              style={{
+                '--offset': bar,
+              }}/>
+          ))}
         </div>
       </div>
     </ReadMeImg>

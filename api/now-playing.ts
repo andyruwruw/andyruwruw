@@ -1,6 +1,7 @@
 import { NowRequest, NowResponse } from '@vercel/node';
 import { renderToString } from 'react-dom/server';
 import { decode } from 'querystring';
+
 import { Player } from '../components/spotify/NowPlaying';
 import { nowPlaying, trackAudioFeatures } from '../services/spotify';
 

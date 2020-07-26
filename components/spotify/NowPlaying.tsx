@@ -52,7 +52,6 @@ export const Player: React.FC<Props> = ({
             margin: 2px 0;
             animation: bars ${(audioFeatures.tempo / 60) * 1}s ease calc(var(--offset) * -.5s) infinite;
           }
-          
           .paused { 
             animation-play-state: paused !important;
             background: #e1e4e8 !important;

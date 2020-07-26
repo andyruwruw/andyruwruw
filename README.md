@@ -11,9 +11,16 @@
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
-<!-- # i'm a front-end intern for chess.com
+<!-- 
 
 # i'm a vue.js fanboy -->
+# i'm a front-end intern for chess.com
+
+<p align="center">
+  <a href="https://www.chess.com/member/andyruwruw">
+    <img src="https://andyruwruw.vercel.app/api/chess-games">
+  </a>
+</p>
 
 # i really like music :guitar:
 
@@ -28,7 +35,10 @@
 </p>
 
 <p align="center">
+  Tempo and color of the bars are determined by the tracks tempo, energy, danceability and happiness.
+</p>
+
+<p align="center">
   Inspired by <a href="https://github.com/natemoo-re">natemoo-re</a>
 </p>
 
-# get in contact!

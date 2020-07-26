@@ -18,6 +18,7 @@
   "homepage": "https://github.com/andyruwruw/andyruwruw#readme",
   "dependencies": {
     "@vercel/node": "^1.7.3",
+    "chess-web-api": "^1.0.10",
     "isomorphic-unfetch": "^3.0.0",
     "querystring": "^0.2.0",
     "react": "^16.13.1",

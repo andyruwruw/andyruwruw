@@ -1,4 +1,6 @@
-<h1 align="center">i really like music :headphones:</h1>
+<h1 align="center">
+  i really like music :headphones:
+</h1>
 
 <p align="center">
   <a href="https://andyruwruw.vercel.app/api/now-playing?open">
@@ -18,7 +20,9 @@
   <i>inspired by <a href="https://github.com/natemoo-re">natemoo-re</a> :raised_hands:</i>
 </p>
 
-# i'm a frontend intern at chess.com ♟️
+<h1 align="center">
+  i'm a frontend intern at chess.com ♟️
+</h1>
 
 <p align="center">
   <a href="https://www.chess.com/member/andyruwruw">
@@ -30,7 +34,9 @@
   <i>luckily being good at chess isn't a pre-req :stuck_out_tongue_winking_eye:</i>
 </p>
 
-# i'm a vue.js fanboy, but i do some other stuff too :hammer:
+<h1 align="center">
+  i'm a vue.js fanboy, but i do some other stuff too :hammer:
+</h1>
 
 <p align="center">
   <img src="https://andyruwruw.vercel.app/api/skills">

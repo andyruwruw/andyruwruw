@@ -1,6 +1,4 @@
-<p align="center">
-  <h2>i really like music :headphones:</h2>
-</p>
+<h1 align="center">i really like music :headphones:</h1>
 
 <p align="center">
   <a href="https://andyruwruw.vercel.app/api/now-playing?open">

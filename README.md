@@ -16,8 +16,9 @@ Here are some ideas to get you started:
 -->
 
 # I really like music.
+
 <p align="center">
-Currently jamming out to:
+  ### Currently jamming out to:
 </p>
 
 <p align="center">

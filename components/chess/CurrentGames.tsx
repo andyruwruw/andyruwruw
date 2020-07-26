@@ -22,12 +22,6 @@ export const CurrentGames: React.FC<Props> = ({
     <ReadMeImg
       width="600"
       height="246">
-      <style>
-        {`
-          @import url(\'/components/chess/CurrentGames.css\');
-        `}
-      </style>
-      
       <Text
         id="title"
         weight="bold"
@@ -64,6 +58,51 @@ export const CurrentGames: React.FC<Props> = ({
           </div>
         ))}
       </div>
+      
+      <style>
+        {`
+          .games-wrapper {
+            display: flex;
+            justify-content: space-around;
+          }
+          
+          #title {
+            margin: .5rem;
+            text-align: center;
+          }
+          
+          .board {
+            border-radius: .5rem;
+            overflow: hidden;
+          }
+          
+          .row {
+            display: flex;
+          }
+          
+          .col {
+            align-items: center;
+            background: #B58863;
+            display: flex;
+            height: 22px;
+            justify-content: center;
+            width: 22px;
+          }
+          
+          .col.light {
+            background: #F0D9B5;
+          }
+          
+          .col img {
+            width: 90%;
+          }
+          
+          .username {
+            text-align: center;
+            margin-top: 6px;
+          }
+        `}
+      </style>
     </ReadMeImg>
   );
 };

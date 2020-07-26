@@ -30,12 +30,6 @@ export const Skills: React.FC<Props> = ({}) => {
     <ReadMeImg
       width="800"
       height="212">
-      <style>
-        {`
-          @import url(\'/components/skills/Skills.css\');
-        `}
-      </style>
-
       <div id="icon-wrapper">
         <VueIcon 
           width="70"
@@ -112,6 +106,25 @@ export const Skills: React.FC<Props> = ({}) => {
           height="70">
         </CSSIcon>
       </div>
+      
+      <style>
+        {`
+          #icon-wrapper {
+            display: flex;
+            
+            flex-wrap: wrap;
+          }
+          
+          #icon-wrapper svg {
+            margin: 12px;
+            padding: 8px;
+            background: rgb(250, 250, 250);
+            box-shadow: 2px 2px 2px rgba(0,0,0,.3);
+            border: 1px solid rgba(0,0,0,.01);
+            border-radius: 12px;
+          }
+        `}
+      </style>
     </ReadMeImg>
   );
 };

@@ -32,6 +32,11 @@ export const Player: React.FC<Props> = ({
             display: flex;
             justify-content: center;
           }
+          .time-stamp {
+            color: #999999;
+            margin-left: 4px;
+            font-size: 12px;
+          }
           .bar-container {
             width: 111px;
             display: flex;

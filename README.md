@@ -12,22 +12,6 @@
 - ⚡ Fun fact: ...
 -->
 
-# i'm a front-end intern for chess.com ♟️
-
-<p align="center">
-  <a href="https://www.chess.com/member/andyruwruw">
-    <img src="https://andyruwruw.vercel.app/api/chess-games">
-  </a>
-</p>
-
-<p align="center">
-  Being good at chess isn't a pre-req :stuck_out_tongue_winking_eye:
-</p>
-
-# i'm a vue.js fanboy, but i do some other stuff too :space_invader:
-
-
-
 # i really like music :guitar:
 
 <p align="center">
@@ -48,3 +32,20 @@
   Inspired by <a href="https://github.com/natemoo-re">natemoo-re</a>
 </p>
 
+# i'm a front-end intern for chess.com ♟️
+
+<p align="center">
+  <a href="https://www.chess.com/member/andyruwruw">
+    <img src="https://andyruwruw.vercel.app/api/chess-games">
+  </a>
+</p>
+
+<p align="center">
+  Being good at chess isn't a pre-req :stuck_out_tongue_winking_eye:
+</p>
+
+# i'm a vue.js fanboy, but i do some other stuff too :space_invader:
+
+<p align="center">
+  <img src="https://andyruwruw.vercel.app/api/skills">
+</p>

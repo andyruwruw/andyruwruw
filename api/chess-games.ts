@@ -1,6 +1,7 @@
 import { NowRequest, NowResponse } from '@vercel/node';
 import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
+import moment from 'moment';
 
 import { CurrentGames } from '../components/chess/CurrentGames';
 import { currentGames, convertFen } from '../services/chesscom';
@@ -45,8 +46,10 @@ export default async function (req: NowRequest, res: NowResponse) {
   res.setHeader('Content-Type', 'image/svg+xml');
   res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
 
+  let date = moment().format('M/D/YY h:mma');
+
   const text = renderToString(
-    CurrentGames({ games: convertedGames, pieceImages })
+    CurrentGames({ games: convertedGames, pieceImages, date })
   );
   return res.status(200).send(text);
 }

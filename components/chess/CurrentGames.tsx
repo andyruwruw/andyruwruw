@@ -6,11 +6,13 @@ import Text from '../Text';
 export interface Props {
   games: Array<Object>;
   pieceImages: Object;
+  date: String,
 };
 
 export const CurrentGames: React.FC<Props> = ({
   games,
   pieceImages,
+  date,
 }) => {
   return (
     <ReadMeImg
@@ -21,6 +23,11 @@ export const CurrentGames: React.FC<Props> = ({
           #title {
             margin: .5rem;
             text-align: center;
+          }
+          .time-stamp {
+            color: #999999;
+            margin-left: 4px;
+            font-size: 12px;
           }
           .games-wrapper {
             display: flex;
@@ -53,6 +60,9 @@ export const CurrentGames: React.FC<Props> = ({
         weight="bold"
         size="title">
         current games
+        <span className="time-stamp">
+          (updated {date})
+        </span>
       </Text>
       
       <div className="games-wrapper">

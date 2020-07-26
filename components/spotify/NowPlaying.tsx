@@ -53,9 +53,9 @@ export const Player: React.FC<Props> = ({
             --offset: 0;
             height: 10px;
             width: 50px;
-            background: rgba(${audioFeatures.energy * 255}, ${audioFeatures.valence * 255}, ${audioFeatures.danceability * 255}, .7);
+            background: rgba(${audioFeatures ? audioFeatures.energy * 255 : 255}, ${audioFeatures ? audioFeatures.valence * 255 : 255}, ${audioFeatures ? audioFeatures.danceability * 255 : 255}, .7);
             margin: 2px 0;
-            animation: bars ${(audioFeatures.tempo / 60) * 1}s ease calc(var(--offset) * -.5s) infinite;
+            animation: bars ${audioFeatures ? (audioFeatures.tempo / 60) * 1 : 1}s ease calc(var(--offset) * -.5s) infinite;
           }
           .paused { 
             animation-play-state: paused !important;
@@ -179,15 +179,16 @@ export const Player: React.FC<Props> = ({
         currently jamming to
       </Text>
       <div className="now-playing-wrapper">
-        <div className="bar-container left">
-          {[0, 1, 2].map((bar) => (
-            <div className="bar"
-              key={`left-bar-${bar}`}
-              style={{
-                '--offset': bar,
-              }}/>
-          ))}
-        </div>
+        {track && <div className="bar-container left">
+            {[0, 1, 2].map((bar) => (
+              <div className="bar"
+                key={`left-bar-${bar}`}
+                style={{
+                  '--offset': bar,
+                }}/>
+            ))}
+          </div>
+        }
 
         <div
           className={isPlaying ? "disabled" : ""}
@@ -237,15 +238,16 @@ export const Player: React.FC<Props> = ({
           </div>
         </div>
 
-        <div className="bar-container right">
-          {[0, 1, 2].map((bar) => (
-            <div className="bar"
-              key={`right-bar-${bar}`}
-              style={{
-                '--offset': bar,
-              }}/>
-          ))}
-        </div>
+        {track && <div className="bar-container right">
+            {[0, 1, 2].map((bar) => (
+              <div className="bar"
+                key={`right-bar-${bar}`}
+                style={{
+                  '--offset': bar,
+                }}/>
+            ))}
+          </div>
+        }
       </div>
     </ReadMeImg>
   );

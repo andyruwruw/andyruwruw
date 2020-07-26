@@ -25,8 +25,8 @@ export default async function (req: NowRequest, res: NowResponse) {
     return res.status(200).end();
   }
 
-  let audioFeatures;
-  if (item) {
+  let audioFeatures = null;
+  if (Object.keys(item).length) {
     audioFeatures = await trackAudioFeatures(item.id, Authorization);
   }
 

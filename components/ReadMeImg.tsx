@@ -1,5 +1,12 @@
 import React from 'react';
 
+/**
+ * README Image
+ * Most important component here. Allows us to send components
+ * as images back to Github. Everything we make will be inside
+ * @param width
+ * @param height 
+ */
 const ReadMeImg: React.StatelessComponent<{ width: String, height: String }> = ({ children, width, height }) => (
   <svg
     fill="none"

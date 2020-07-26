@@ -13,6 +13,11 @@ export interface Props {
   audioFeatures: Object;
 }
 
+/**
+ * Player
+ * Displays currently playing track.
+ * @param trackLists 
+ */
 export const Player: React.FC<Props> = ({
   cover,
   track,
@@ -28,147 +33,16 @@ export const Player: React.FC<Props> = ({
       height="125">
       <style>
         {`
-          .now-playing-wrapper {
-            display: flex;
-            justify-content: center;
-          }
-          .time-stamp {
-            color: #999999;
-            margin-left: 4px;
-            font-size: 12px;
-          }
-          .bar-container {
-            width: 111px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-          }
-          .bar-container.right {
-            align-items: flex-start;
-          }
-          .bar-container.left {
-            align-items: flex-end;
-          }
+          @import url(\'/components/spotify/NowPlaying.css\');
+
           .bar {
-            --offset: 0;
-            height: 10px;
-            width: 50px;
             background: rgba(${audioFeatures ? audioFeatures.energy * 255 : 255}, ${audioFeatures ? audioFeatures.valence * 255 : 255}, ${audioFeatures ? audioFeatures.danceability * 255 : 255}, .7);
-            margin: 2px 0;
             animation: bars ${audioFeatures ? (audioFeatures.tempo / 60) * 1 : 1}s ease calc(var(--offset) * -.5s) infinite;
           }
-          .paused { 
-            animation-play-state: paused !important;
-            background: #e1e4e8 !important;
-          }
-          img:not([src]) {
-            content: url("data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==");
-            border-radius: 6px;
-            background: #FFF;
-            border: 1px solid #e1e4e8;
-          }
-          p {
-            display: block;
-            opacity: 0;
-          }
-          .progress-bar {
-            position: relative;
-            width: 100%;
-            height: 4px;
-            margin: -1px;
-            border: 1px solid #e1e4e8;
-            border-radius: 4px;
-            overflow: hidden;
-            padding: 2px;
-            z-index: 0;
-          }
+
           #progress {
-            position: absolute;
-            top: -1px;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            transform-origin: left center;
-            background-color: #24292e;
             animation: progress ${duration}ms linear;
             animation-delay: -${progress}ms;
-          }
-          .progress-bar,
-          #track,
-          #artist,
-          #cover,
-          #title {
-            opacity: 0;
-            animation: appear 300ms ease-out forwards;
-          }
-          #track,
-          #artist {
-            width: 170px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-          #title {
-            animation-delay: 0ms;
-            text-align: center;
-            margin: .5rem;
-          }
-          #track {
-            animation-delay: 400ms;
-          }
-          #artist {
-            animation-delay: 500ms;
-          }
-          .progress-bar {
-            animation-delay: 550ms;
-            margin-top: 4px;
-          }
-          #cover {
-            animation-name: cover-appear;
-            animation-delay: 300ms;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 3px 10px rgba(0,0,0,0.05);
-          }
-          #cover:not([src]) {
-            box-shadow: none;
-          }
-          @keyframes cover-appear {
-            from {
-              opacity: 0;
-              transform: scale(0.8);
-            }
-            to {
-              opacity: 1;
-              transform: scale(1);
-            }
-          }
-          @keyframes appear {
-            from {
-              opacity: 0;
-              transform: translateX(-8px);
-            }
-            to {
-              opacity: 1;
-              transform: translateX(0);
-            }
-          }
-          @keyframes progress {
-            from {
-              transform: scaleX(0)
-            }
-            to {
-              transform: scaleX(1)
-            }
-          }
-          @keyframes bars {
-            0% {
-              width: 25%;
-            }
-            50% {
-              width: 90%;
-            }
-            100% {
-              width: 25%;
-            }
           }
         `}
       </style>

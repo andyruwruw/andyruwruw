@@ -20,6 +20,11 @@ import VueIcon from '../icons/vue';
 
 export interface Props {};
 
+/**
+ * Skills
+ * Displays various SVG icons
+ * @param trackLists 
+ */
 export const Skills: React.FC<Props> = ({}) => {
   return (
     <ReadMeImg
@@ -27,52 +32,85 @@ export const Skills: React.FC<Props> = ({}) => {
       height="212">
       <style>
         {`
-          #icon-wrapper {
-            display: flex;
-            
-            flex-wrap: wrap;
-          }
-          #icon-wrapper svg {
-            margin: 12px;
-            padding: 8px;
-            background: rgb(250, 250, 250);
-            box-shadow: 2px 2px 2px rgba(0,0,0,.3);
-            border: 1px solid rgba(0,0,0,.01);
-            border-radius: 12px;
-          }
+          @import url(\'/components/skills/Skills.css\');
         `}
       </style>
 
       <div id="icon-wrapper">
-        <VueIcon width="70" height="70"></VueIcon>
+        <VueIcon 
+          width="70"
+          height="70">
+        </VueIcon>
 
-        <ReactIcon width="70" height="70"></ReactIcon>
+        <ReactIcon 
+          width="70"
+          height="70">
+        </ReactIcon>
 
-        <SassIcon width="70" height="70"></SassIcon>
+        <SassIcon 
+          width="70"
+          height="70">
+        </SassIcon>
 
-        <TSIcon width="70" height="70"></TSIcon>
+        <TSIcon 
+          width="70"
+          height="70">
+        </TSIcon>
 
-        <NodeIcon width="70" height="70"></NodeIcon>
+        <NodeIcon 
+          width="70"
+          height="70">
+        </NodeIcon>
 
-        <MongoIcon width="70" height="70"></MongoIcon>
+        <MongoIcon 
+          width="70"
+          height="70">
+        </MongoIcon>
 
-        <NGINXIcon width="70" height="70"></NGINXIcon>
+        <NGINXIcon 
+          width="70"
+          height="70">
+        </NGINXIcon>
 
-        <PythonIcon width="70" height="70"></PythonIcon>
+        <PythonIcon 
+          width="70"
+          height="70">
+        </PythonIcon>
 
-        <CPlusPlusIcon width="70" height="70"></CPlusPlusIcon>
+        <CPlusPlusIcon 
+          width="70"
+          height="70">
+        </CPlusPlusIcon>
 
-        <JavaIcon width="70" height="70"></JavaIcon>
+        <JavaIcon 
+          width="70"
+          height="70">
+        </JavaIcon>
 
-        <CIcon width="70" height="70"></CIcon>
+        <CIcon 
+          width="70"
+          height="70">
+        </CIcon>
 
-        <GitIcon width="70" height="70"></GitIcon>
+        <GitIcon 
+          width="70"
+          height="70">
+        </GitIcon>
 
-        <HTMLIcon width="70" height="70"></HTMLIcon>
+        <HTMLIcon 
+          width="70"
+          height="70">
+        </HTMLIcon>
 
-        <JSIcon width="70" height="70"></JSIcon>
+        <JSIcon 
+          width="70"
+          height="70">
+        </JSIcon>
 
-        <CSSIcon width="70" height="70"></CSSIcon>
+        <CSSIcon 
+          width="70"
+          height="70">
+        </CSSIcon>
       </div>
     </ReadMeImg>
   );

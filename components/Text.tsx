@@ -15,8 +15,7 @@ const colors = {
 };
 
 const families = {
-  default:
-    "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji",
+  default: "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji",
   mono: "SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace",
 };
 
@@ -25,6 +24,14 @@ const weights = {
   bold: 600,
 };
 
+/**
+ * Text
+ * Simple text line with styles as props.
+ * @param weight
+ * @param family 
+ * @param color
+ * @param size 
+ */
 const Text: React.FC<any> = ({
   children = "",
   weight = "default",

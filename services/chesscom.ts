@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-unfetch';
 import ChessWebAPI from 'chess-web-api';
 
 const chessAPI = new ChessWebAPI();

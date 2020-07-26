@@ -8,6 +8,12 @@ export interface Props {
   pieceImages: Object;
 };
 
+/**
+ * Current Games
+ * Returns image of 3 chess game positions
+ * @param games
+ * @param pieceImages 
+ */
 export const CurrentGames: React.FC<Props> = ({
   games,
   pieceImages,
@@ -18,37 +24,10 @@ export const CurrentGames: React.FC<Props> = ({
       height="246">
       <style>
         {`
-          #title {
-            margin: .5rem;
-            text-align: center;
-          }
-          .games-wrapper {
-            display: flex;
-            justify-content: space-around;
-          }
-          .row {
-            display: flex;
-          }
-          .col {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 22px;
-            height: 22px;
-            background: #B58863;
-          }
-          .col.light {
-            background: #F0D9B5;
-          }
-          .col img {
-            width: 90%;
-          }
-          .username {
-            text-align: center;
-            margin-top: 6px;
-          }
+          @import url(\'/components/chess/CurrentGames.css\');
         `}
       </style>
+      
       <Text
         id="title"
         weight="bold"

@@ -22,11 +22,8 @@ export default async function (req: NowRequest, res: NowResponse) {
   // Here we run Array.map on the 3 lists to get the objects to what we need.
   const convertedTracks = await Promise.all(topPlayedTracks.map(async (trackList) => {
     return Promise.all(trackList.map(async (track) => {
-      // A link to click on :)
       const href = track.external_urls.spotify;
-      // The artists as a string
       const artist = (track.artists || []).map(({ name }) => name).join(', ');
-      // Getting the images and converting them
       const { images = [] } = track.album || {};
       const url = images[images.length - 1]?.url;
       let cover = null;
@@ -34,7 +31,6 @@ export default async function (req: NowRequest, res: NowResponse) {
         const buff = await (await fetch(url)).arrayBuffer();
         cover = `data:image/jpeg;base64,${Buffer.from(buff).toString('base64')}`;
       }
-      // Our new object
       return {
         cover,
         artist,
@@ -43,9 +39,11 @@ export default async function (req: NowRequest, res: NowResponse) {
       };
     }));
   }));
+  
   // Hey! I'm returning an image!
   res.setHeader('Content-Type', 'image/svg+xml');
   res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+
   // Generating the component and rendering it
   const text = renderToString(
     TopPlayed({ trackLists: convertedTracks })

@@ -11,8 +11,6 @@
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
-<!-- 
-# i'm a vue.js fanboy -->
 
 # i'm a front-end intern for chess.com ♟️
 
@@ -25,6 +23,10 @@
 <p align="center">
   Being good at chess isn't a pre-req :stuck_out_tongue_winking_eye:
 </p>
+
+# i'm a vue.js fanboy, but i do some other stuff too :space_invader:
+
+
 
 # i really like music :guitar:
 

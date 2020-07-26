@@ -26,9 +26,6 @@ export const CurrentGames: React.FC<Props> = ({
             display: flex;
             justify-content: space-around;
           }
-          .board {
-            border: 1px solid rgb(0, 0, 0, .3);
-          }
           .row {
             display: flex;
           }
@@ -65,7 +62,7 @@ export const CurrentGames: React.FC<Props> = ({
             className="game">
             <Text
               className="username"
-              color="gray">
+              color="grey-lighter">
               {game.isWhite ? game.black : game.white}
             </Text>
 
@@ -87,7 +84,7 @@ export const CurrentGames: React.FC<Props> = ({
 
             <Text
               className="username"
-              color="gray">
+              color="grey-lighter">
               {game.isWhite ? game.white : game.black}
             </Text>
           </div>

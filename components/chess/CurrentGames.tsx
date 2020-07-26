@@ -45,7 +45,7 @@ export const CurrentGames: React.FC<Props> = ({
           }
           .username {
             text-align: center;
-            margin-bottom: 6px;
+            margin-top: 6px;
           }
         `}
       </style>
@@ -61,12 +61,6 @@ export const CurrentGames: React.FC<Props> = ({
           <div
             key={`chess-game-${gameIndex}`}
             className="game">
-            <Text
-              className="username"
-              color="grey-lighter">
-              {game.isWhite ? game.black : game.white}
-            </Text>
-
             <div className="board">
               {game.position.map((row, rowIndex) => (
               <div
@@ -82,6 +76,12 @@ export const CurrentGames: React.FC<Props> = ({
               </div>
               ))}
             </div>
+
+            <Text
+              className="username"
+              color="grey-lighter">
+              vs. {game.isWhite ? game.black : game.white}
+            </Text>
           </div>
         ))}
       </div>

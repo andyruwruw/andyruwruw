@@ -226,7 +226,7 @@ export const Player: React.FC<Props> = ({
             <Text
               id="artist"
               color={!track ? "gray" : undefined}>
-              {artist || "Nothing playing..."}
+              {artist || "Nothing Currently :)"}
             </Text>
             {track && (
               <div className="progress-bar">

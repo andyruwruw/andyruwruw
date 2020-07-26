@@ -124,7 +124,7 @@ export const TopPlayed: React.FC<Props> = ({
               weight="bold"
               size="title"
               color="grey">
-              {term === 0 ? 'All Time Favorites' : term === 1 ? 'Monthly Favorites' : 'Current Favorites'}
+              {term === 0 ? 'all time favorites' : term === 1 ? 'monthly favorites' : 'current favorites'}
             </Text>
 
             {list.map((track, trackIndex) => (

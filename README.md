@@ -18,10 +18,6 @@ Here are some ideas to get you started:
 # I really like music.
 
 <p align="center">
-  ### Currently jamming out to:
-</p>
-
-<p align="center">
   <a href="https://andyruwruw.vercel.app/api/now-playing?open">
     <img src="https://andyruwruw.vercel.app/api/now-playing">
   </a>

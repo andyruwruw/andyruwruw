@@ -33,7 +33,11 @@
 </p>
 
 <p align="center">
-  <i>luckily being good at chess isn't a pre-req</i>
+  <i>luckily being good at chess isn't a pre-req to the job!</i>
+</p>
+
+<p align="center">
+  <i><a href="https://www.chess.com/member/andyruwruw">challenge me</a> to a game</i>
 </p>
 
 <p></p>

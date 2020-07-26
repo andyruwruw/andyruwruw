@@ -14,8 +14,9 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
+# i'm a vue.js fanboy
 
-# I really like music.
+# i really like music :guitar:
 
 <p align="center">
   <a href="https://andyruwruw.vercel.app/api/now-playing?open">
@@ -26,3 +27,5 @@ Here are some ideas to get you started:
 <p align="center">
   <img src="https://andyruwruw.vercel.app/api/top-played">
 </p>
+
+Inspired by [natemoo-re](https://github.com/natemoo-re)

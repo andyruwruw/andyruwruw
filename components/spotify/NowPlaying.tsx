@@ -71,6 +71,13 @@ export const Player: React.FC<Props> = ({
             opacity: 0;
             animation: appear 300ms ease-out forwards;
           }
+          #track,
+          #artist {
+            width: 180px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
           #title {
             animation-delay: 0ms;
             text-align: center;

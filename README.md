@@ -17,7 +17,7 @@
 </p>
  
 <p align="center">
-  <i>inspired by <a href="https://github.com/natemoo-re">natemoo-re</a> :raised_hands:</i>
+  <i>inspired by <a href="https://github.com/natemoo-re">natemoo-re</a></i>
 </p>
 
 <p></p>
@@ -33,7 +33,7 @@
 </p>
 
 <p align="center">
-  <i>luckily being good at chess isn't a pre-req :stuck_out_tongue_winking_eye:</i>
+  <i>luckily being good at chess isn't a pre-req</i>
 </p>
 
 <p></p>

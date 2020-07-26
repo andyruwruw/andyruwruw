@@ -1,9 +1,6 @@
-### Hi there 👋
+<!-- ### Hi there 👋 -->
 
 <!--
-**andyruwruw/andyruwruw** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-
-Here are some ideas to get you started:
 
 - 🔭 I’m currently working on ...
 - 🌱 I’m currently learning ...
@@ -14,7 +11,9 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
-# i'm a vue.js fanboy
+<!-- # i'm a front-end intern for chess.com
+
+# i'm a vue.js fanboy -->
 
 # i really like music :guitar:
 
@@ -28,4 +27,8 @@ Here are some ideas to get you started:
   <img src="https://andyruwruw.vercel.app/api/top-played">
 </p>
 
-Inspired by [natemoo-re](https://github.com/natemoo-re)
+<p align="center">
+  Inspired by <a href="https://github.com/natemoo-re">natemoo-re</a>
+</p>
+
+# get in contact!

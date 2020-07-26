@@ -5,10 +5,12 @@ import Text from '../Text';
 
 export interface Props {
   games: Array<Object>;
+  pieceImages: Object;
 };
 
 export const CurrentGames: React.FC<Props> = ({
   games,
+  pieceImages,
 }) => {
   return (
     <ReadMeImg
@@ -76,7 +78,7 @@ export const CurrentGames: React.FC<Props> = ({
                 <div
                   key={`chess-game-${gameIndex}=row-${rowIndex}-col-${colIndex}`}
                   className={(rowIndex + colIndex) % 2 === (game.isWhite ? 0 : 1) ? 'col light' : 'col'}>
-                  {col && <img src={`https://raw.githubusercontent.com/andyruwruw/andyruwruw/master/assets/${col === col.toUpperCase() ? 'white' : 'black'}-${col.toLowerCase()}.png`}></img>}
+                  {col && <img src={pieceImages[`${col === col.toUpperCase() ? 'white' : 'black'}-${col.toLowerCase()}`]}></img>}
                 </div>
                 ))}
               </div>

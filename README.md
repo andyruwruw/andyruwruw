@@ -14,7 +14,7 @@
 <!-- 
 
 # i'm a vue.js fanboy -->
-# i'm a front-end intern for chess.com
+# i'm a front-end intern for chess.com ♜
 
 <p align="center">
   <a href="https://www.chess.com/member/andyruwruw">

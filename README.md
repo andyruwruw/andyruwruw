@@ -1,22 +1,22 @@
 <p align="center">
   <h1>i really like music :headphones:</h1>
-</p>
 
-<p align="center">
+
+
   <a href="https://andyruwruw.vercel.app/api/now-playing?open">
     <img src="https://andyruwruw.vercel.app/api/now-playing">
   </a>
-</p>
 
-<p align="center">
+
+
   <img src="https://andyruwruw.vercel.app/api/top-played">
-</p>
 
-<p align="center">
+
+
   <i>tempo and color of the bars are determined by the track's tempo, energy, danceability and happiness</i>
-</p>
 
-<p align="center">
+
+
   <i>inspired by <a href="https://github.com/natemoo-re">natemoo-re</a> :raised_hands:</i>
 </p>
 

@@ -1,18 +1,4 @@
-<!-- ### Hi there 👋 -->
-
-<!--
-
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
-
-# i really like music :guitar:
+# i really like music :headphones:
 
 <p align="center">
   <a href="https://andyruwruw.vercel.app/api/now-playing?open">
@@ -25,14 +11,14 @@
 </p>
 
 <p align="center">
-  Tempo and color of the bars are determined by the tracks tempo, energy, danceability and happiness.
+  tempo and color of the bars are determined by the track's tempo, energy, danceability and happiness.
 </p>
 
 <p align="center">
-  Inspired by <a href="https://github.com/natemoo-re">natemoo-re</a>
+  Inspired by <a href="https://github.com/natemoo-re">natemoo-re</a> :raised_hands:
 </p>
 
-# i'm a front-end intern for chess.com ♟️
+# i'm a frontend intern at chess.com ♟️
 
 <p align="center">
   <a href="https://www.chess.com/member/andyruwruw">
@@ -41,10 +27,10 @@
 </p>
 
 <p align="center">
-  Being good at chess isn't a pre-req :stuck_out_tongue_winking_eye:
+  luckily being good at chess isn't a pre-req :stuck_out_tongue_winking_eye:
 </p>
 
-# i'm a vue.js fanboy, but i do some other stuff too :space_invader:
+# i'm a vue.js fanboy, but i do some other stuff too :hammer:
 
 <p align="center">
   <img src="https://andyruwruw.vercel.app/api/skills">

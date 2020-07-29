@@ -50,11 +50,20 @@ export default async function (req: NowRequest, res: NowResponse) {
     const black = (game.black.split('/').reverse())[0];
     return {
       position: await convertFen(isWhite, game.fen),
+      noGame: false,
       isWhite,
       white,
       black,
     };
   }));
+
+  // Adding empty spots if there aren't 3!
+  for (let i = convertedGames.length; i < 3; i++) {
+    convertedGames.push({
+      position: await convertFen(true, '8/8/8/8/8/8/8/8/'),
+      noGame: true,
+    });
+  }
 
   // Hey! I'm returning an image!
   res.setHeader('Content-Type', 'image/svg+xml');
@@ -62,7 +71,7 @@ export default async function (req: NowRequest, res: NowResponse) {
 
   // Generating the component and rendering it
   const text = renderToString(
-    CurrentGames({ games: convertedGames, pieceImages })
+    CurrentGames({ games: convertedGames, pieceImages }),
   );
   return res.status(200).send(text);
 }

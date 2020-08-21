@@ -1,12 +1,14 @@
 # How It Works
 
+## Hello Friend
+
 Hello! Hope you like the profile page README.md.
 
 100% inpsired by [natemoo-re](https://github.com/natemoo-re). The implementation of generating and inserting functional React components into the markdown is based on his design. I thought what he did was awesome.
 
 I had been working with [Spotify's API](https://developer.spotify.com/documentation/web-api/) for a few months and thought what he did was awesome! Read through is code to figure out what he did, and implemented it here.
 
-## How it works
+## The Magic
 
 The README.md is made dynamic by creating a back-end that returns images. By linking our `<img>` tags in the README.md to this back-end, each time the page is loaded, a new image is requested.
 

@@ -34,7 +34,7 @@ hello! here's a little about me:
 </p>
 
 <p align="center">
-  <i>luckily being good at chess isn't a pre-req to the job</i>
+  <i>luckily being good at chess wasn't a pre-req to the job</i>
 </p>
 
 <p></p>

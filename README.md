@@ -24,7 +24,7 @@ hello! here's a little about me:
 <p></p>
 
 <h1>
-  i'm a frontend intern at chess.com ♟️
+  i was a frontend intern at chess.com ♟️
 </h1>
 
 <p align="center">

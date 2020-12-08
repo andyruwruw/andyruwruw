@@ -23,7 +23,7 @@ const getPieces = async () => {
 
   for (const color of colors) {
     for (const piece of pieces) {
-      const buff = await (await fetch(`https://raw.githubusercontent.com/andyruwruw/andyruwruw/master/assets/${color}-${piece}.png`)).arrayBuffer();
+      const buff = await (await fetch(`https://raw.githubusercontent.com/andyruwruw/andyruwruw/master/src/assets/${color}-${piece}.png`)).arrayBuffer();
       pieceImages[`${color}-${piece}`] = `data:image/jpeg;base64,${Buffer.from(buff).toString('base64')}`;
     }
   }

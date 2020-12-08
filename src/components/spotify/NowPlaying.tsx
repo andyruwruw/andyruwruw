@@ -57,7 +57,7 @@ export const Player: React.FC<Props> = ({
             alignItems: "center",
             paddingTop: 8,
             paddingLeft: 4,
-            background: "rgb(0,0,0,.01)",
+            background: "rgb(255,255,255,.8)",
             borderRadius: ".3rem",
             margin: ".5rem 0",
             padding: ".5rem",

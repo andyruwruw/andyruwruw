@@ -1,5 +1,5 @@
-import fetch from "isomorphic-unfetch";
-import { stringify } from "querystring";
+import fetch from 'isomorphic-unfetch';
+import { stringify } from 'querystring';
 
 // Secret secrets :)
 const {
@@ -9,7 +9,7 @@ const {
 } = process.env;
 
 // Some request header stuff
-const basic = Buffer.from(`${client_id}:${client_secret}`).toString("base64");
+const basic = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
 const Authorization = `Basic ${basic}`;
 
 /**
@@ -18,16 +18,16 @@ const Authorization = `Basic ${basic}`;
  * @returns {String} Authorization Header for Spotify Requests.
  */
 async function getAuthorizationToken() {
-  const url = new URL("https://accounts.spotify.com/api/token");
+  const url = new URL('https://accounts.spotify.com/api/token');
   const body = stringify({
-    grant_type: "refresh_token",
+    grant_type: 'refresh_token',
     refresh_token,
   });
   const response = await fetch(`${url}`, {
-    method: "POST",
+    method: 'POST',
     headers: {
       Authorization,
-      "Content-Type": "application/x-www-form-urlencoded",
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
     body,
   }).then((r) => r.json());

@@ -1,8 +1,11 @@
-import { NowRequest, NowResponse } from '@vercel/node';
+import {
+  NowRequest,
+  NowResponse,
+} from '@vercel/node';
 import { renderToString } from 'react-dom/server';
 
-import { TopPlayed } from '../components/spotify/TopPlayed';
-import { topPlayed } from '../services/spotify';
+import { TopPlayed } from '../src/components/spotify/TopPlayed';
+import { topPlayed } from '../src/services/spotify';
 
 /**
  * Top Played

@@ -1,7 +1,10 @@
-import { NowRequest, NowResponse } from '@vercel/node';
+import {
+  NowRequest,
+  NowResponse,
+} from '@vercel/node';
 import { renderToString } from 'react-dom/server';
 
-import { Skills } from '../components/skills/Skills';
+import { Skills } from '../src/components/skills/Skills';
 
 /**
  * Skills

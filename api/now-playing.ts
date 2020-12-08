@@ -1,9 +1,15 @@
-import { NowRequest, NowResponse } from '@vercel/node';
+import {
+  NowRequest,
+  NowResponse,
+} from '@vercel/node';
 import { renderToString } from 'react-dom/server';
 import { decode } from 'querystring';
 
-import { Player } from '../components/spotify/NowPlaying';
-import { nowPlaying, trackAudioFeatures } from '../services/spotify';
+import { Player } from '../src/components/spotify/NowPlaying';
+import {
+  nowPlaying,
+  trackAudioFeatures,
+} from '../src/services/spotify';
 
 /**
  * Now Playing
@@ -19,6 +25,8 @@ export default async function (req: NowRequest, res: NowResponse) {
     is_playing: isPlaying = false,
     progress_ms: progress = 0,
   } = await nowPlaying();
+
+  console.log(req);
 
   // If the link was clicked, reroute them to the href.
   const params = decode(req.url.split('?')[1]) as any;

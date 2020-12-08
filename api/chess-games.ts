@@ -1,9 +1,15 @@
-import { NowRequest, NowResponse } from '@vercel/node';
+import {
+  NowRequest,
+  NowResponse,
+} from '@vercel/node';
 import { renderToString } from 'react-dom/server';
 import fetch from 'node-fetch';
 
-import { CurrentGames } from '../components/chess/CurrentGames';
-import { currentGames, convertFen } from '../services/chesscom';
+import { CurrentGames } from '../src/components/chess/CurrentGames';
+import {
+  currentGames,
+  convertFen,
+} from '../src/services/chesscom';
 
 let pieceImages = {};
 

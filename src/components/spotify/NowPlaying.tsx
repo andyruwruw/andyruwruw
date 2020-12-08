@@ -34,7 +34,10 @@ export const Player: React.FC<Props> = ({
       <Text
         id="title"
         weight="bold"
-        size="title">
+        size="title"
+        style={{
+          mixBlendMode: "difference",
+        }}>
         currently jamming to
       </Text>
 

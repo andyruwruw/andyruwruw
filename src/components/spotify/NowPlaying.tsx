@@ -124,7 +124,6 @@ export const Player: React.FC<Props> = ({
           .now-playing-wrapper {
             display: flex;
             justify-content: center;
-            background: red;
           }
           
           p {

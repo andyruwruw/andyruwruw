@@ -51,17 +51,17 @@ export const Player: React.FC<Props> = ({
         }
 
         <div
-          className={isPlaying ? "disabled" : ""}
+          className={isPlaying ? 'disabled' : ''}
           style={{
-            display: "flex",
-            alignItems: "center",
+            display: 'flex',
+            alignItems: 'center',
             paddingTop: 8,
             paddingLeft: 4,
-            background: "rgb(255,255,255,.8)",
-            borderRadius: ".3rem",
-            margin: ".5rem 0",
-            padding: ".6rem",
-            border: "1px solid var(--color-border-secondary)",
+            background: 'rgb(255,255,255,.8)',
+            borderRadius: '.3rem',
+            margin: '.5rem 0',
+            padding: '.6rem',
+            border: '1px solid rgba(125, 125, 125, .3)',
           }}>
           <img
             id="cover"
@@ -113,17 +113,10 @@ export const Player: React.FC<Props> = ({
 
       <style>
         {`
-          html[data-color-mode=dark] {
-            .now-playing-wrapper {
-              display: flex;
-              justify-content: center;
-              background: red !important;
-            }
-          }
-
           .now-playing-wrapper {
             display: flex;
             justify-content: center;
+            mix-blend-mode: difference;
           }
           
           p {
@@ -136,6 +129,7 @@ export const Player: React.FC<Props> = ({
             border-radius: 6px;
             background: #FFF;
             border: 1px solid #e1e4e8;
+            mix-blend-mode: normal;
           }
           
           .progress-bar,

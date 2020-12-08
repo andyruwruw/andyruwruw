@@ -34,10 +34,7 @@ export const Player: React.FC<Props> = ({
       <Text
         id="title"
         weight="bold"
-        size="title"
-        style={{
-          mixBlendMode: "difference",
-        }}>
+        size="title">
         currently jamming to
       </Text>
 
@@ -116,7 +113,7 @@ export const Player: React.FC<Props> = ({
 
       <style>
         {`
-          html[data-color-mode='dark'] {
+          html[data-color-mode=dark] {
             .now-playing-wrapper {
               display: flex;
               justify-content: center;

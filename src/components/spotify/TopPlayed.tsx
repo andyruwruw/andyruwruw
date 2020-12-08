@@ -18,7 +18,7 @@ export const TopPlayed: React.FC<Props> = ({
   return (
     <ReadMeImg
       width="800"
-      height="371">
+      height="493">
       <div className="top-played-wrapper">
         {trackLists.map((list, term) => (
           <div

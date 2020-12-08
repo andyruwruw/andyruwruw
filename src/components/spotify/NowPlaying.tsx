@@ -61,7 +61,7 @@ export const Player: React.FC<Props> = ({
             borderRadius: ".3rem",
             margin: ".5rem 0",
             padding: ".6rem",
-            border: "1px solid rgb(0,0,0,.1)",
+            border: "1px solid var(--color-border-secondary)",
           }}>
           <img
             id="cover"
@@ -124,6 +124,7 @@ export const Player: React.FC<Props> = ({
           .now-playing-wrapper {
             display: flex;
             justify-content: center;
+            background: red;
           }
           
           p {

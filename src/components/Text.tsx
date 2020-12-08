@@ -7,11 +7,12 @@ const sizes = {
 };
 
 const colors = {
-  default: "var(--color-text-primary)",
-  "grey-lighter": "#999999",
-  "gray-light": "#e1e4e8",
-  gray: "#586069",
-  "gray-dark": "#24292e",
+  default: 'black',
+  'grey-lighter': '#999999',
+  'gray-light': '#e1e4e8',
+  gray: '#586069',
+  'gray-dark': '#24292e',
+  'standard': 'rgba(125, 125, 125, .3)',
 };
 
 const families = {

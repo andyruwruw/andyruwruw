@@ -34,7 +34,8 @@ export const Player: React.FC<Props> = ({
       <Text
         id="title"
         weight="bold"
-        size="title">
+        size="title"
+        color="standard">
         currently jamming to
       </Text>
 

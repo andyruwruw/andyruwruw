@@ -90,7 +90,7 @@ export const TopPlayed: React.FC<Props> = ({
             display: flex;
             align-items: center;
             max-width: 250px;
-            background: rgb(255,255,255,.8),
+            background: rgb(255,255,255,.8);
             border-radius: .3rem;
             margin: 0rem .5rem 1rem;
             padding: .7rem,

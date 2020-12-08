@@ -60,7 +60,7 @@ export const Player: React.FC<Props> = ({
             background: "rgb(255,255,255,.8)",
             borderRadius: ".3rem",
             margin: ".5rem 0",
-            padding: ".7rem",
+            padding: ".6rem",
             border: "1px solid rgb(0,0,0,.1)",
           }}>
           <img
@@ -113,6 +113,14 @@ export const Player: React.FC<Props> = ({
 
       <style>
         {`
+          @media (prefers-color-scheme: dark) {
+            .now-playing-wrapper {
+              display: flex;
+              justify-content: center;
+              background: red !important;
+            }
+          }
+
           .now-playing-wrapper {
             display: flex;
             justify-content: center;

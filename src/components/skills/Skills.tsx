@@ -117,7 +117,7 @@ export const Skills: React.FC<Props> = ({}) => {
           #icon-wrapper svg {
             margin: 12px;
             padding: 8px;
-            background: rgba(125, 125, 125, .3);
+            background: rgba(255, 255, 255, .2);
             box-shadow: 2px 2px 2px rgba(0,0,0,.3);
             border: 1px solid rgba(0,0,0,.01);
             border-radius: 12px;

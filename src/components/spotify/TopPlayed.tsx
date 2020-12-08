@@ -18,7 +18,7 @@ export const TopPlayed: React.FC<Props> = ({
   return (
     <ReadMeImg
       width="800"
-      height="413">
+      height="371">
       <div className="top-played-wrapper">
         {trackLists.map((list, term) => (
           <div
@@ -90,10 +90,10 @@ export const TopPlayed: React.FC<Props> = ({
             display: flex;
             align-items: center;
             max-width: 250px;
-            background: rgb(0,0,0,.01);
+            background: rgb(255,255,255,.8),
             border-radius: .3rem;
-            margin: .5rem;
-            padding: .5rem;
+            margin: 0rem .5rem 1rem;
+            padding: .7rem,
             border: 1px solid rgb(0,0,0,.1);
           }
           
@@ -116,7 +116,7 @@ export const TopPlayed: React.FC<Props> = ({
           .title {
             animation-delay: 0ms;
             text-align: center;
-            margin: .5rem;
+            margin: .5rem .5rem 1rem;
           }
           
           .name,

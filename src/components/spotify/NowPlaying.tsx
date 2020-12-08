@@ -60,7 +60,7 @@ export const Player: React.FC<Props> = ({
             background: "rgb(255,255,255,.8)",
             borderRadius: ".3rem",
             margin: ".5rem 0",
-            padding: ".5rem",
+            padding: ".7rem",
             border: "1px solid rgb(0,0,0,.1)",
           }}>
           <img
@@ -85,7 +85,8 @@ export const Player: React.FC<Props> = ({
 
             <Text
               id="artist"
-              color={!track ? "gray" : undefined}>
+              color={!track ? "gray" : undefined}
+              size="small">
               {artist || "Nothing Currently :)"}
             </Text>
             {track && (

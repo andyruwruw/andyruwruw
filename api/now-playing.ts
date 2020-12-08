@@ -26,7 +26,9 @@ export default async function (req: NowRequest, res: NowResponse) {
     progress_ms: progress = 0,
   } = await nowPlaying();
 
-  console.log(req);
+  console.log(req.cookies);
+
+  console.log(req.headers);
 
   // If the link was clicked, reroute them to the href.
   const params = decode(req.url.split('?')[1]) as any;

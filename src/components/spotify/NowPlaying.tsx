@@ -116,7 +116,7 @@ export const Player: React.FC<Props> = ({
 
       <style>
         {`
-          @media (prefers-color-scheme: dark) {
+          html[data-color-mode='dark'] {
             .now-playing-wrapper {
               display: flex;
               justify-content: center;

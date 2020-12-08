@@ -93,7 +93,7 @@ export const TopPlayed: React.FC<Props> = ({
             background: rgb(255,255,255,.6);
             border-radius: .3rem;
             margin: 0rem .5rem 1rem;
-            padding: .7rem,
+            padding: .7rem;
             border: 1px solid rgb(0,0,0,.1);
           }
           

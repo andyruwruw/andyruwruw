@@ -87,3 +87,17 @@ SPOTIFY_REFRESH_TOKEN=
 [Chess.com's Public Data API](https://www.chess.com/news/view/published-data-api) does not require any specific authentication.
 
 I wrote a [little wrapper for their API here](https://www.npmjs.com/package/chess-web-api).
+
+# Dark Mode
+
+There were some complications with dark mode.
+
+While the best solution would be to utilize Github's `dark-color-mode` property like so:
+```
+html[data-color-mode='dark'] {
+  --text-color-normal: hsl(210, 10%, 62%);
+}
+```
+Sadly IT DOESN'T WORK.
+
+Best solution is to pick colors that work for dark and light modes, making it arguably look worse for light mode, but at least be viewable for dark mode.

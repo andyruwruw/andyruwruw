@@ -114,19 +114,10 @@ export const Player: React.FC<Props> = ({
 
       <style>
         {`
-          html[data-color-mode='dark'] {
-            --andyruwruw-profile-normal: red;
-          }
-
-          html {
-            --andyruwruw-profile-normal: transparent;
-          }
-
           .now-playing-wrapper {
             display: flex;
             justify-content: center;
             mix-blend-mode: difference;
-            background: var(--andyruwruw-profile-normal);
           }
           
           p {

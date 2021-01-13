@@ -1,14 +1,30 @@
-import { NowRequest, NowResponse } from '@vercel/node';
-import axios from 'axios';
-import querystring from 'querystring';
+import axios, { AxiosResponse } from 'axios';
+import {
+  NowRequest,
+  NowResponse,
+} from '@vercel/node';
+import querystring, { ParsedUrlQueryInput } from 'querystring';
+
+const redirectURL: string = 'http://localhost:3000/api/auth';
 
 const {
   SPOTIFY_CLIENT_ID: client_id,
   SPOTIFY_CLIENT_SECRET: client_secret,
   STATE,
 } = process.env;
-import { redirectURL } from '../src/config/index';
 
+interface IAuthResponse {
+  refresh_token: string,
+  access_token: string,
+}
+
+/**
+ * Retrieves access token, for repo owner only
+ *
+ * @param {NowRequest} req
+ * @param {NowResponse} res
+ * @returns {IAuthResponse}
+ */
 export default async function (req: NowRequest, res: NowResponse) {
   const {
     code,
@@ -16,30 +32,32 @@ export default async function (req: NowRequest, res: NowResponse) {
   } = req.query;
 
   if (code && state && state === STATE) {
-    const url = 'https://accounts.spotify.com/api/token';
-    const data = {
+    const url: string = 'https://accounts.spotify.com/api/token';
+    const data: ParsedUrlQueryInput = {
       code,
       redirect_uri: redirectURL,
       grant_type: 'authorization_code',
     };
 
-    const options = {
+    const options: object = {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         Authorization: `Basic ${Buffer.from(`${client_id}:${client_secret}`).toString('base64')}`,
       },
     };
 
-    const response = await axios.post(
-      url, 
+    const response: AxiosResponse<any> = await axios.post(
+      url,
       querystring.stringify(data),
       options,
     );
 
-    return res.send({
+    const result: IAuthResponse = {
       refresh_token: response.data.refresh_token,
       access_token: response.data.access_token,
-    });
+    };
+
+    return res.send(result);
   }
 
   return res.send(false);

@@ -1,39 +1,22 @@
+import fetch from 'node-fetch';
 import {
   NowRequest,
   NowResponse,
 } from '@vercel/node';
 import { renderToString } from 'react-dom/server';
-import fetch from 'node-fetch';
 
 import { CurrentGames } from '../src/components/chess/CurrentGames';
 import {
   currentGames,
   convertFen,
+  getPieces,
 } from '../src/services/chesscom';
 
-let pieceImages = {};
-
 /**
- * Get Pieces
- * Loads the images into a buffer. Only does this once.
- */
-const getPieces = async () => {
-  let pieces = [ 'b', 'k', 'n', 'p', 'q', 'r' ];
-  let colors = ['white', 'black'];
-
-  for (const color of colors) {
-    for (const piece of pieces) {
-      const buff = await (await fetch(`https://raw.githubusercontent.com/andyruwruw/andyruwruw/master/src/assets/${color}-${piece}.png`)).arrayBuffer();
-      pieceImages[`${color}-${piece}`] = `data:image/jpeg;base64,${Buffer.from(buff).toString('base64')}`;
-    }
-  }
-};
-
-/**
- * Current Chess Games
- * Returns an image displaying 3 of my current chess games from chess.com.
- * @param {NowRequest} req Request for Image
- * @param {NowResponse} res Response to request.
+ * Returns an image displaying 3 of my current chess games from Chess.com
+ *
+ * @param {NowRequest} req Request for image
+ * @param {NowResponse} res Response to request
  */
 export default async function (req: NowRequest, res: NowResponse) {
   // Using an awesome library called chess-web-api to get our data ;)
@@ -41,43 +24,57 @@ export default async function (req: NowRequest, res: NowResponse) {
     games = [],
   } = await currentGames();
 
-  // Converting the piece images if nessisary.
-  if (Object.keys(pieceImages).length == 0) {
-    await getPieces();
-  }
+  let pieceImages: object = await getPieces();
 
   // Limiting the width of the games.
-  games.length = Math.min(games.length, 3);
+  games.length = Math.min(
+    games.length,
+    3,
+  );
 
   // There's a lot of data we don't need! Converting the FEN to an array
-  const convertedGames = await Promise.all(games.map(async (game) => {
-    const isWhite = game.white.includes('andyruwruw');
-    const white = (game.white.split('/').reverse())[0];
-    const black = (game.black.split('/').reverse())[0];
+  const convertedGames: Array<IConvertedGame> = await Promise.all(games.map(async (game) => {
+    const isWhite: boolean = game.white.includes('andyruwruw');
+    const white: string = (game.white.split('/').reverse())[0];
+    const black: string = (game.black.split('/').reverse())[0];
+
     return {
-      position: await convertFen(isWhite, game.fen),
-      noGame: false,
-      isWhite,
-      white,
       black,
+      isWhite,
+      noGame: false,
+      position: await convertFen(isWhite, game.fen),
+      white,
     };
   }));
 
   // Adding empty spots if there aren't 3!
   for (let i = convertedGames.length; i < 3; i++) {
     convertedGames.push({
-      position: await convertFen(true, '8/8/8/8/8/8/8/8/'),
+      black: null,
+      isWhite: true,
       noGame: true,
+      position: convertFen(true, '8/8/8/8/8/8/8/8/'),
+      white: null,
     });
   }
 
   // Hey! I'm returning an image!
-  res.setHeader('Content-Type', 'image/svg+xml');
-  res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+  res.setHeader(
+    'Content-Type',
+    'image/svg+xml',
+  );
+  res.setHeader(
+    'Cache-Control',
+    's-maxage=1, stale-while-revalidate',
+  );
 
   // Generating the component and rendering it
-  const text = renderToString(
-    CurrentGames({ games: convertedGames, pieceImages }),
+  const text: string = renderToString(
+    CurrentGames({
+      games: convertedGames,
+      pieceImages,
+    }),
   );
-  return res.status(200).send(text);
+
+  return res.send(text);
 }

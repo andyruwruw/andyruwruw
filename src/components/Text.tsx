@@ -1,12 +1,21 @@
 import React from 'react';
 
-const sizes = {
+
+interface ITextParameters {
+  children: React.ReactNode | string,
+  weight: string,
+  family: string,
+  color: string,
+  size: string,
+}
+
+const sizes: object = {
   default: 14,
   small: 12,
   title: 18,
 };
 
-const colors = {
+const colors: object = {
   default: 'black',
   'grey-lighter': '#999999',
   'gray-light': '#e1e4e8',
@@ -15,12 +24,12 @@ const colors = {
   'standard': 'rgba(115, 115, 115, .8)',
 };
 
-const families = {
-  default: "-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji",
-  mono: "SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace",
+const families: object = {
+  default: '-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji',
+  mono: 'SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace',
 };
 
-const weights = {
+const weights: object = {
   default: 400,
   bold: 600,
 };
@@ -34,26 +43,25 @@ const weights = {
  * @param size 
  */
 const Text: React.FC<any> = ({
-  children = "",
-  weight = "default",
-  family = "default",
-  color = "default",
-  size = "default",
+  children = '',
+  weight = 'default',
+  family = 'default',
+  color = 'default',
+  size = 'default',
   ...props
-}) => {
+}: ITextParameters) => {
   return (
     <p
       style={{
-        whiteSpace: "pre",
-        fontSize: `${sizes[size]}px`,
-        lineHeight: 1.5,
-        fontFamily: families[family],
         color: colors[color],
+        fontFamily: families[family],
+        fontSize: `${sizes[size]}px`,
         fontWeight: weights[weight],
+        lineHeight: 1.5,
+        whiteSpace: 'pre',
       }}
-      {...props}
-    >
-      {children}
+      { ...props }>
+      { children }
     </p>
   );
 };

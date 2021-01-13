@@ -8,14 +8,14 @@ import { TopPlayed } from '../src/components/spotify/TopPlayed';
 import { topPlayed } from '../src/services/spotify';
 
 /**
- * Top Played
- * Returns an image displaying top 5 played tracks for 3 various time ranges.
- * @param {NowRequest} req Request for Image
- * @param {NowResponse} res Response to request.
+ * Returns an image displaying top 5 played tracks for 3 various time ranges
+ *
+ * @param {NowRequest} req
+ * @param {NowResponse} res
  */
 export default async function (req: NowRequest, res: NowResponse) {
   // Retrieving top played tracks from spotify.
-  const topPlayedTracks = [
+  const topPlayedTracks: Array<Array<ITrackObject>> = [
     await topPlayed('long_term'),
     await topPlayed('medium_term'),
     await topPlayed('short_term')
@@ -23,33 +23,40 @@ export default async function (req: NowRequest, res: NowResponse) {
 
   // There's a lot of data we don't need!
   // Here we run Array.map on the 3 lists to get the objects to what we need.
-  const convertedTracks = await Promise.all(topPlayedTracks.map(async (trackList) => {
+  const convertedTracks: Array<Array<IConvertedTrack>> = await Promise.all(topPlayedTracks.map(async (trackList) => {
     return Promise.all(trackList.map(async (track) => {
-      const href = track.external_urls.spotify;
-      const artist = (track.artists || []).map(({ name }) => name).join(', ');
       const { images = [] } = track.album || {};
-      const url = images[images.length - 1]?.url;
-      let cover = null;
+      const url: string = images[images.length - 1]?.url;
+
+      let cover: string = null;
       if (url) {
-        const buff = await (await fetch(url)).arrayBuffer();
+        const buff: ArrayBuffer = await (await fetch(url)).arrayBuffer();
         cover = `data:image/jpeg;base64,${Buffer.from(buff).toString('base64')}`;
       }
+
       return {
         cover,
-        artist,
+        artist: (track.artists || []).map(({ name }) => name).join(', '),
         track: track.name,
-        href,
+        href: track.external_urls.spotify,
       };
     }));
   }));
   
   // Hey! I'm returning an image!
-  res.setHeader('Content-Type', 'image/svg+xml');
-  res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+  res.setHeader(
+    'Content-Type',
+    'image/svg+xml'
+  );
+  res.setHeader(
+    'Cache-Control',
+    's-maxage=1, stale-while-revalidate',
+  );
 
   // Generating the component and rendering it
-  const text = renderToString(
+  const text: string = renderToString(
     TopPlayed({ trackLists: convertedTracks })
   );
-  return res.status(200).send(text);
+
+  return res.send(text);
 }

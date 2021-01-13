@@ -1,50 +1,50 @@
 import React from 'react';
 
-import ReadMeImg from '../ReadMeImg';
+import ConvertSVG from '../ConvertSVG';
 import Text from '../Text';
 
-export interface Props {
-  games: Array<Object>;
-  pieceImages: Object;
+export interface ICurrentGamesParameters {
+  games: Array<IConvertedGame>;
+  pieceImages: object;
 };
 
 /**
- * Current Games
  * Returns image of 3 chess game positions
- * @param games
- * @param pieceImages 
+ *
+ * @param {Array<ICurrentDailyGames>} games
+ * @param {object} pieceImages
  */
-export const CurrentGames: React.FC<Props> = ({
+export const CurrentGames: React.FC<ICurrentGamesParameters> = ({
   games,
   pieceImages,
-}) => {
+}: ICurrentGamesParameters) => {
   return (
-    <ReadMeImg
-      width="600"
-      height="246">
+    <ConvertSVG
+      height="246"
+      width="600">
       <Text
         id="title"
-        weight="bold"
-        size="title">
-        {!games[0].noGame ? 'current games' : 'no active games'}
+        size="title"
+        weight="bold">
+        { !games[0].noGame ? 'current games' : 'no active games' }
       </Text>
       
       <div className="games-wrapper">
         {games.map((game, gameIndex) => (
           <div
-            key={`chess-game-${gameIndex}`}
+            key={ `chess-game-${gameIndex}` }
             className="game">
             <div className="board">
               {game.position.map((row, rowIndex) => (
               <div
-                key={`chess-game-${gameIndex}-row-${rowIndex}`}
+                key={`chess-game-${ gameIndex }-row-${ rowIndex }`}
                 className="row">
                 {row.map((col, colIndex) => (
                 <div
-                  key={`chess-game-${gameIndex}=row-${rowIndex}-col-${colIndex}`}
+                  key={`chess-game-${ gameIndex }=row-${ rowIndex }-col-${ colIndex }`}
                   className={`col ${(rowIndex + colIndex) % 2 === (game.isWhite ? 0 : 1) ? 'light' : ''} ${game.noGame ? 'empty' : ''}`}>
                   {col && 
-                    <img src={pieceImages[`${col === col.toUpperCase() ? 'white' : 'black'}-${col.toLowerCase()}`]}></img>
+                    <img src={ pieceImages[`${col === col.toUpperCase() ? 'white' : 'black' }-${ col.toLowerCase() }`]}></img>
                   }
                 </div>
                 ))}
@@ -56,7 +56,7 @@ export const CurrentGames: React.FC<Props> = ({
               <Text
                 className="username"
                 color="grey-lighter">
-                vs. {game.isWhite ? game.black : game.white}
+                vs. { game.isWhite ? game.black : game.white }
               </Text>
             }
           </div>
@@ -115,6 +115,6 @@ export const CurrentGames: React.FC<Props> = ({
           }
         `}
       </style>
-    </ReadMeImg>
+    </ConvertSVG>
   );
 };

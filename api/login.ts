@@ -3,29 +3,34 @@ import {
   NowResponse,
 } from '@vercel/node';
 import querystring from 'querystring';
-import opener from 'opener';
 
-import { redirectURL } from '../src/config/index';
+const redirectURL: string = 'http://localhost:3000/api/auth';
+
 const {
   SPOTIFY_CLIENT_ID: client_id,
   STATE: state,
 } = process.env;
 
+/**
+ * Returns Spotify authorization link, for repo owner only
+ *
+ * @param {NowRequest} req
+ * @param {NowResponse} res
+ */
 export default async function (req: NowRequest, res: NowResponse) {
-  const scopes = [
+  const scopes: Array<string> = [
     'user-read-currently-playing',
     'user-top-read',
   ];
 
-  const url = `https://accounts.spotify.com/authorize?${querystring.stringify({
-    response_type: 'code',
+  const url: string = `https://accounts.spotify.com/authorize?${querystring.stringify({
     client_id,
-    scope: scopes.join('%20'),
     redirect_uri: redirectURL,
-    state,
+    response_type: 'code',
+    scope: scopes.join('%20'),
     show_dialog: 'false',
+    state,
   })}`;
 
-  opener(url);
   return res.send(url);
-};  
+};

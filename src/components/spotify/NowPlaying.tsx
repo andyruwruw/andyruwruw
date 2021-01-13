@@ -1,24 +1,24 @@
 import React from 'react';
 
-import ReadMeImg from '../ReadMeImg';
+import ConvertSVG from '../ConvertSVG';
 import Text from '../Text';
 
-export interface Props {
+export interface IPlayerProps {
   cover?: string;
   track: string;
   artist: string;
   progress: number;
   duration: number;
   isPlaying: boolean;
-  audioFeatures: Object;
+  audioFeatures: IAudioFeaturesResponse;
 }
 
 /**
- * Player
- * Displays currently playing track.
- * @param trackLists 
+ * Displays currently playing track
+ *
+ * @param {IPlayerProps} nowPlaying Currently playing context
  */
-export const Player: React.FC<Props> = ({
+export const Player: React.FC<IPlayerProps> = ({
   cover,
   track,
   artist,
@@ -26,24 +26,25 @@ export const Player: React.FC<Props> = ({
   duration,
   isPlaying,
   audioFeatures,
-}) => {
+}: IPlayerProps) => {
   return (
-    <ReadMeImg
-      width="466"
-      height="125">
+    <ConvertSVG
+      height="125"
+      width="466">
       <Text
         id="title"
-        weight="bold"
+        color="standard"
         size="title"
-        color="standard">
-        currently jamming to
+        weight="bold">
+        { isPlaying ? 'currently jamming out to' : 'last jammed out to' }
       </Text>
 
       <div className="now-playing-wrapper">
         {track && <div className="bar-container left">
             {[0, 1, 2].map((bar) => (
-              <div className="bar"
-                key={`left-bar-${bar}`}
+              <div
+                className="bar"
+                key={ `left-bar-${bar}` }
                 style={{
                   '--offset': bar,
                 }}/>
@@ -52,49 +53,49 @@ export const Player: React.FC<Props> = ({
         }
 
         <div
-          className={isPlaying ? 'disabled' : ''}
+          className={ isPlaying ? 'disabled' : '' }
           style={{
-            display: 'flex',
             alignItems: 'center',
-            paddingTop: 8,
-            paddingLeft: 4,
+            display: 'flex',
             background: 'rgb(255,255,255,.6)',
+            border: '1px solid rgba(125, 125, 125, .3)',
             borderRadius: '.3rem',
             margin: '.5rem 0',
             padding: '.6rem',
-            border: '1px solid rgba(125, 125, 125, .3)',
+            paddingLeft: 4,
+            paddingTop: 8,
           }}>
           <img
             id="cover"
-            src={cover ?? null}
-            width="48"
-            height="48" />
+            height="48"
+            src={ cover ?? null }
+            width="48" />
 
           <div
             style={{
-              display: "flex",
+              display: 'flex',
               flex: 1,
-              flexDirection: "column",
-              marginTop: -4,
+              flexDirection: 'column',
               marginLeft: 8,
+              marginTop: -4,
             }}>
             <Text
               id="track"
               weight="bold">
-              {`${track ?? ""} `.trim()}
+              { `${track ?? ''} `.trim() }
             </Text>
 
             <Text
+              color={ !track ? 'gray' : undefined }
               id="artist"
-              color={!track ? "gray" : undefined}
               size="small">
-              {artist || "Nothing Currently :)"}
+              { artist || 'Nothing Currently' }
             </Text>
             {track && (
               <div className="progress-bar">
                 <div
-                  id="progress"
-                  className={!isPlaying ? "paused" : ""} />
+                  className={ !isPlaying ? 'paused' : '' }
+                  id="progress"/>
               </div>
             )}
           </div>
@@ -102,8 +103,9 @@ export const Player: React.FC<Props> = ({
 
         {track && <div className="bar-container right">
             {[0, 1, 2].map((bar) => (
-              <div className="bar"
-                key={`right-bar-${bar}`}
+              <div
+                className="bar"
+                key={ `right-bar-${bar}` }
                 style={{
                   '--offset': bar,
                 }}/>
@@ -126,10 +128,10 @@ export const Player: React.FC<Props> = ({
           }
           
           img:not([src]) {
-            content: url("data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==");
-            border-radius: 6px;
             background: #FFF;
             border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            content: url("data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==");
             mix-blend-mode: normal;
           }
           
@@ -138,22 +140,22 @@ export const Player: React.FC<Props> = ({
           #artist,
           #cover,
           #title {
-            opacity: 0;
             animation: appear 300ms ease-out forwards;
+            opacity: 0;
           }
           
           #track,
           #artist {
-            width: 170px;
-            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            width: 170px;
+            white-space: nowrap;
           }
           
           #title {
             animation-delay: 0ms;
-            text-align: center;
             margin: .5rem;
+            text-align: center;
           }
           
           #track {
@@ -165,8 +167,8 @@ export const Player: React.FC<Props> = ({
           }
           
           #cover {
-            animation-name: cover-appear;
             animation-delay: 300ms;
+            animation-name: cover-appear;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 3px 10px rgba(0,0,0,0.05);
           }
           
@@ -175,10 +177,10 @@ export const Player: React.FC<Props> = ({
           }
           
           .bar-container {
-            width: 111px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            width: 111px;
           }
           
           .bar-container.right {
@@ -191,37 +193,38 @@ export const Player: React.FC<Props> = ({
           
           .bar {
             --offset: 0;
+
+            animation: bars ${ audioFeatures ? (audioFeatures.tempo / 60) * 1 : 1 }s ease calc(var(--offset) * -.5s) infinite;
+            background: rgba(${ audioFeatures ? audioFeatures.energy * 255 : 255 }, ${ audioFeatures ? audioFeatures.valence * 255 : 255 }, ${ audioFeatures ? audioFeatures.danceability * 255 : 255 }, .7);
             height: 10px;
-            width: 50px;
             margin: 2px 0;
-            background: rgba(${audioFeatures ? audioFeatures.energy * 255 : 255}, ${audioFeatures ? audioFeatures.valence * 255 : 255}, ${audioFeatures ? audioFeatures.danceability * 255 : 255}, .7);
-            animation: bars ${audioFeatures ? (audioFeatures.tempo / 60) * 1 : 1}s ease calc(var(--offset) * -.5s) infinite;
+            width: 50px;
           }
           
           .progress-bar {
-            position: relative;
-            width: 100%;
-            height: 4px;
-            margin: -1px;
+            animation-delay: 550ms;
             border: 1px solid #e1e4e8;
             border-radius: 4px;
+            height: 4px;
+            margin: -1px;
+            margin-top: 4px;
             overflow: hidden;
             padding: 2px;
+            position: relative;
+            width: 100%;
             z-index: 0;
-            animation-delay: 550ms;
-            margin-top: 4px;
           }
           
           #progress {
-            position: absolute;
-            top: -1px;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            transform-origin: left center;
-            background-color: #24292e;
             animation: progress ${duration}ms linear;
             animation-delay: -${progress}ms;
+            background-color: #24292e;
+            height: 6px;
+            left: 0;
+            position: absolute;
+            top: -1px;
+            transform-origin: left center;
+            width: 100%;
           }
           
           .paused { 
@@ -273,6 +276,6 @@ export const Player: React.FC<Props> = ({
           }
         `}
       </style>
-    </ReadMeImg>
+    </ConvertSVG>
   );
 };

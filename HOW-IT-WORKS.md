@@ -1,16 +1,16 @@
 # How It Works
 
-## Hello Friend
+## Hello!
 
-Hello! Hope you like the profile page README.md.
+Hope you like the profile page README.md.
 
 100% inpsired by [natemoo-re](https://github.com/natemoo-re). The implementation of generating and inserting functional React components into the markdown is based on his design. I thought what he did was awesome.
 
-I had been working with [Spotify's API](https://developer.spotify.com/documentation/web-api/) for a few months and thought what he did was awesome! Read through is code to figure out what he did, and implemented it here.
+I had been working with [Spotify's API](https://developer.spotify.com/documentation/web-api/) for a year and thought what he did was awesome! Read through is code to figure out what he did, and implemented it here.
 
 ## The Magic
 
-The README.md is made dynamic by creating a back-end that returns images. By linking our `<img>` tags in the README.md to this back-end, each time the page is loaded, a new image is requested.
+The README.md is made dynamic by creating a back-end API that returns images. By linking our `<img>` tags in the README.md to this back-end, each time the page is loaded, a new image is requested.
 
 ```
 <!-- README.md -->
@@ -24,22 +24,22 @@ The server is hosted on [Vercel](https://vercel.com/). By creating a folder call
 
 ## Making your own
 
-Most important file is [ReadMeImg.tsx](https://github.com/andyruwruw/andyruwruw/blob/master/components/ReadMeImg.tsx), which takes any children components and wraps them in `<svg>` and `<foreignObject>` tags. 
+Most important file is [ConvertSVG.tsx](https://github.com/andyruwruw/andyruwruw/blob/master/components/ConvertSVG.tsx), which takes any children components and wraps them in `<svg>` and `<foreignObject>` tags. 
 
-Each React component is wrapped in a `<ReadMeImg>`.
+Each React component is wrapped in a `<ConvertSVG>`.
 ```
 // Some Component File
-import ReadMeImg from '../ReadMeImg';
+import ConvertSVG from '../ConvertSVG';
 
 ...
 
 export const ReactComponent: React.FC<Props> = ({}) => {
   return (
-    <ReadMeImg
+    <ConvertSVG
       width="800"
       height="212">
       
-    </ReadMeImg>
+    </ConvertSVG>
   );
 };
 ```

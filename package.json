@@ -1,6 +1,6 @@
 {
   "name": "andyruwruw-profile-page",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Github profile README.md",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,6 @@
     "chess-web-api": "^1.0.10",
     "isomorphic-unfetch": "^3.0.0",
     "node-fetch": "^2.6.1",
-    "opener": "^1.5.2",
     "querystring": "^0.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

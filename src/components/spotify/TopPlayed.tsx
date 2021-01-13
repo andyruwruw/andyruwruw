@@ -1,10 +1,10 @@
 import React from 'react';
 
-import ReadMeImg from '../ReadMeImg';
+import ConvertSVG from '../ConvertSVG';
 import Text from '../Text';
 
-export interface Props {
-  trackLists: Array<Object>,
+export interface ITopPlayedProps {
+  trackLists: Array<Array<IConvertedTrack>>,
 }
 
 /**
@@ -12,11 +12,11 @@ export interface Props {
  * Displays three lists of tracks.
  * @param trackLists 
  */
-export const TopPlayed: React.FC<Props> = ({
+export const TopPlayed: React.FC<ITopPlayedProps> = ({
   trackLists,
-}) => {
+}: ITopPlayedProps) => {
   return (
-    <ReadMeImg
+    <ConvertSVG
       width="800"
       height="493">
       <div className="top-played-wrapper">
@@ -168,6 +168,6 @@ export const TopPlayed: React.FC<Props> = ({
           }
         `}
       </style>
-    </ReadMeImg>
+    </ConvertSVG>
   );
 };

@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 interface ITextParameters {
   children: React.ReactNode | string,
   weight: string,

@@ -1,5 +1,6 @@
 import c from './c';
 import cplusplus from './cplusplus';
+import csharp from './csharp';
 import css from './css';
 import git from './git';
 import html from './html';
@@ -18,6 +19,7 @@ import vue from './vue';
 export const paths: object = {
   c,
   cplusplus,
+  csharp,
   css,
   git,
   html,

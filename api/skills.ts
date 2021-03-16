@@ -14,6 +14,7 @@ const SKILLS = [
   'nuxt',
   'node',
   'mongodb',
+  'csharp',
   'python',
   'java',
   'c',

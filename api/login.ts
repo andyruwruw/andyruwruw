@@ -19,7 +19,10 @@ const {
  */
 export default async function (req: NowRequest, res: NowResponse) {
   const scopes: Array<string> = [
+    'user-read-playback-position',
+    'user-read-recently-played',
     'user-read-currently-playing',
+    'user-read-playback-state',
     'user-top-read',
   ];
 

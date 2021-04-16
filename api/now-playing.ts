@@ -20,6 +20,8 @@ import { Player } from '../src/components/spotify/NowPlaying';
  */
 export default async function (req: NowRequest, res: NowResponse) {
   try {
+    console.log(JSON.stringify(res));
+
     let {
       Authorization,
       item,

@@ -20,7 +20,10 @@ import { Player } from '../src/components/spotify/NowPlaying';
  */
 export default async function (req: NowRequest, res: NowResponse) {
   try {
-    console.log(JSON.stringify(res));
+    console.log(req);
+    console.log(req.body);
+    console.log(req.rawHeaders);
+    console.log(req.query);
 
     let {
       Authorization,
@@ -94,6 +97,7 @@ export default async function (req: NowRequest, res: NowResponse) {
 
     return res.send(text);
   } catch (error) {
+    console.log(error);
     return res.send('Authentication Errors!');
   }
 }

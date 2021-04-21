@@ -1,6 +1,6 @@
 import {
-  NowRequest,
-  NowResponse,
+  VercelRequest,
+  VercelResponse,
 } from '@vercel/node';
 import { renderToString } from 'react-dom/server';
 
@@ -14,10 +14,10 @@ import {
 /**
  * Returns an image displaying 3 of my current chess games from Chess.com
  *
- * @param {NowRequest} req Request for image
- * @param {NowResponse} res Response to request
+ * @param {VercelRequest} req Request for image
+ * @param {VercelResponse} res Response to request
  */
-export default async function (req: NowRequest, res: NowResponse) {
+export default async function (req: VercelRequest, res: VercelResponse) {
   // Using an awesome library called chess-web-api to get our data ;)
   const {
     games = [],

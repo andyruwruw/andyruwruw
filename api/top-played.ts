@@ -1,6 +1,6 @@
 import {
-  NowRequest,
-  NowResponse,
+  VercelRequest,
+  VercelResponse,
 } from '@vercel/node';
 import { renderToString } from 'react-dom/server';
 
@@ -10,10 +10,10 @@ import { topPlayed } from '../src/services/spotify';
 /**
  * Returns an image displaying top 5 played tracks for 3 various time ranges
  *
- * @param {NowRequest} req
- * @param {NowResponse} res
+ * @param {VercelRequest} req
+ * @param {VercelResponse} res
  */
-export default async function (req: NowRequest, res: NowResponse) {
+export default async function (req: VercelRequest, res: VercelResponse) {
   // Retrieving top played tracks from spotify.
   const topPlayedTracks: Array<Array<ITrackObject>> = [
     await topPlayed('long_term'),

@@ -1,6 +1,6 @@
 import {
-  NowRequest,
-  NowResponse,
+  VercelRequest,
+  VercelResponse,
 } from '@vercel/node';
 import querystring from 'querystring';
 
@@ -14,10 +14,10 @@ const {
 /**
  * Returns Spotify authorization link, for repo owner only
  *
- * @param {NowRequest} req
- * @param {NowResponse} res
+ * @param {VercelRequest} req
+ * @param {VercelResponse} res
  */
-export default async function (req: NowRequest, res: NowResponse) {
+export default async function (req: VercelRequest, res: VercelResponse) {
   const scopes: Array<string> = [
     'user-read-playback-position',
     'user-read-recently-played',

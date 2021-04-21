@@ -1,7 +1,10 @@
-import { decode, ParsedUrlQuery } from 'querystring';
 import {
-  NowRequest,
-  NowResponse,
+  decode,
+  ParsedUrlQuery,
+} from 'querystring';
+import {
+  VercelRequest,
+  VercelResponse,
 } from '@vercel/node';
 import { renderToString } from 'react-dom/server';
 
@@ -15,16 +18,11 @@ import { Player } from '../src/components/spotify/NowPlaying';
 /**
  * Returns an image displaying my current playback state, with nice music bars
  *
- * @param {NowRequest} req Request for image
- * @param {NowResponse} res Response to request
+ * @param {VercelRequest} req Request for image
+ * @param {VercelResponse} res Response to request
  */
-export default async function (req: NowRequest, res: NowResponse) {
+export default async function (req: VercelRequest, res: VercelResponse) {
   try {
-    console.log(req);
-    console.log(req.body);
-    console.log(req.rawHeaders);
-    console.log(req.query);
-
     let {
       Authorization,
       item,

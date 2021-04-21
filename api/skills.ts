@@ -1,6 +1,6 @@
 import {
-  NowRequest,
-  NowResponse,
+  VercelRequest,
+  VercelResponse,
 } from '@vercel/node';
 import { renderToString } from 'react-dom/server';
 
@@ -28,10 +28,10 @@ const SKILLS = [
 /**
  * Returns an image displaying icons of skills and languages
  *
- * @param {NowRequest} req
- * @param {NowResponse} res
+ * @param {VercelRequest} req
+ * @param {VercelResponse} res
  */
-export default async function (req: NowRequest, res: NowResponse) {
+export default async function (req: VercelRequest, res: VercelResponse) {
   // Hey! I'm returning an image!
   res.setHeader(
     'Content-Type',

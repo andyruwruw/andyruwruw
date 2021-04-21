@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
-import {
-  NowRequest,
-  NowResponse,
-} from '@vercel/node';
 import querystring, { ParsedUrlQueryInput } from 'querystring';
+import {
+  VercelRequest,
+  VercelResponse,
+} from '@vercel/node';
 
 const redirectURL: string = 'http://localhost:3000/api/auth';
 
@@ -21,11 +21,11 @@ interface IAuthResponse {
 /**
  * Retrieves access token, for repo owner only
  *
- * @param {NowRequest} req
- * @param {NowResponse} res
+ * @param {VercelRequest} req
+ * @param {VercelResponse} res
  * @returns {IAuthResponse}
  */
-export default async function (req: NowRequest, res: NowResponse) {
+export default async function (req: VercelRequest, res: VercelResponse) {
   const {
     code,
     state,

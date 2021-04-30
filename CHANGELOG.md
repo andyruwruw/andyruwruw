@@ -1,3 +1,13 @@
+# v1.1.1 - April 28, 2021
+
+**Added Skill**
+
+Learned Terraform
+
+**Skill Icon Paths now take Transform Property**
+
+Helped with centering an icon.
+
 # v1.1.0 - January 12, 2021
 
 **Better Typescript definitions**

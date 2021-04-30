@@ -22,7 +22,7 @@ const paths: Array<ISkillPath> = [
     fillRule: null,
     clipRule: null,
     styles: null,
-  }
+  },
 ];
 
 export default paths;

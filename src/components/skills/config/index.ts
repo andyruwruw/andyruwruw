@@ -13,6 +13,7 @@ import nuxt from './nuxt';
 import python from './python';
 import react from './react';
 import sass from './sass';
+import terraform from './terraform';
 import typescript from './typescript';
 import vue from './vue';
 
@@ -32,6 +33,7 @@ export const paths: object = {
   python,
   react,
   sass,
+  terraform,
   typescript,
   vue,
 };

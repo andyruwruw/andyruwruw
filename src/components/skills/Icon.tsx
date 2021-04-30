@@ -27,7 +27,8 @@ const Icon: React.StatelessComponent<IconParameters> = ({
         d={ path.d || 'none' }
         fillRule={ path.fillRule || 'nonzero' }
         clipRule={ path.clipRule || 'nonzero' }
-        styles={ path.styles || '' }/>
+        styles={ path.styles || '' }
+        transform={ 'transform' in path ? path.transform : '' }/>
     ))}
   </svg>
 );

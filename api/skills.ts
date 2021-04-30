@@ -14,15 +14,13 @@ const SKILLS = [
   'nuxt',
   'node',
   'mongodb',
+  'terraform',
   'csharp',
   'python',
   'java',
   'c',
   'cplusplus',
   'git',
-  'html',
-  'javascript',
-  'css',
 ];
 
 /**

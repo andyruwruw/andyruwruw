@@ -16,6 +16,11 @@ Blank image used if none available.
 
 Ensured `/api/auth` and `/api/login` are only available in `NODE_ENV=development`.
 
+**Environment Variables**
+
+Added Chess.com username as environmental variable.
+Added environment as environmental variable.
+
 **Prettier Login**
 
 Login now sends back React component.

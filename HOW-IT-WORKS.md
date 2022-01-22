@@ -1,14 +1,12 @@
 # How It Works
 
-## Hello!
-
 Hope you like the profile page README.md.
 
 100% inpsired by [natemoo-re](https://github.com/natemoo-re). The implementation of generating and inserting functional React components into the markdown is based on his design. I thought what he did was awesome.
 
 I had been working with [Spotify's API](https://developer.spotify.com/documentation/web-api/) for a year and thought what he did was awesome! Read through is code to figure out what he did, and implemented it here.
 
-## The Magic
+# The Magic
 
 The README.md is made dynamic by creating a back-end API that returns images. By linking our `<img>` tags in the README.md to this back-end, each time the page is loaded, a new image is requested.
 
@@ -22,7 +20,7 @@ From the server, each function requests the data it needs, builds a react compon
 
 The server is hosted on [Vercel](https://vercel.com/). By creating a folder called `api`, each file is [treated as an endpoint](https://vercel.com/docs/serverless-functions/introduction).
 
-## Making your own
+# Making your own
 
 Most important file is [ConvertSVG.tsx](https://github.com/andyruwruw/andyruwruw/blob/master/components/ConvertSVG.tsx), which takes any children components and wraps them in `<svg>` and `<foreignObject>` tags. 
 
@@ -58,7 +56,7 @@ const text = renderToString(
 return res.status(200).send(text);
 ```
 
-## Image Buffers
+# Image Buffers
 
 Another important note, images need to be turned into Buffers and then into a string.
 ```
@@ -70,34 +68,68 @@ const imageSrc = `data:image/jpeg;base64,${Buffer.from(buff).toString('base64')}
 <img src="imageSrc" />
 ```
 
-## Using the Same APIs
+# Using Spotify API
 
 If you're looking to use some of this same code, you'll need a `refresh_token` from Spotify connected to your account, and a registered application.
 
 More on getting that refresh token [here](https://developer.spotify.com/documentation/general/guides/authorization-guide/).
 
-Once you have that, create a .env with these fields:
+I made and endpoint to easily allow you to retrieve your refresh token. Simply clone this repository and register an application with [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/login).
+
+Once you have that, create a `.env` in this repository's root directory ([example](https://github.com/andyruwruw/andyruwruw/blob/master/.env.example)) with these fields:
 
 ```
-SPOTIFY_CLIENT_ID=
-SPOTIFY_CLIENT_SECRET=
-SPOTIFY_REFRESH_TOKEN=
+# Spotify Application
+SPOTIFY_CLIENT_ID=<your spotify application client id here>
+SPOTIFY_CLIENT_SECRET=<your spotify application client secret here>
 ```
+
+Go to the repository in your console and run the following:
+
+```
+$ npm install
+
+$ npm run start
+```
+
+Once it's ready, go to *http://localhost:3000/api/login* on a browser, and the API will request a refresh token through your registered application and give it back to you.
+
+You can then take that refresh token and place it in your `.env`.
+
+```
+# Spotify User
+SPOTIFY_REFRESH_TOKEN=<your token here>
+```
+
+All the Spotify endpoints will then work for you!
+
+# Using Chess.com's API
 
 [Chess.com's Public Data API](https://www.chess.com/news/view/published-data-api) does not require any specific authentication.
 
-I wrote a [little wrapper for their API here](https://www.npmjs.com/package/chess-web-api).
+You'll have to tell the API what your username is by adding it to the `.env`.
+
+```
+# Chess.com
+CHESS_COM_USERNAME=<chess.com username>
+```
+
+Shameless plug, I wrote a little wrapper for their API here: [chess-web-api](https://www.npmjs.com/package/chess-web-api).
 
 # Dark Mode
 
 There were some complications with dark mode.
 
-While the best solution would be to utilize Github's `dark-color-mode` property like so:
+Some sources say the solution is to utilize Github's `dark-color-mode` property like so:
+
 ```
 html[data-color-mode='dark'] {
   --text-color-normal: hsl(210, 10%, 62%);
 }
 ```
-Sadly IT DOESN'T WORK.
+
+Sadly, IT DOESN'T WORK with my SVG images.
 
 Best solution is to pick colors that work for dark and light modes, making it arguably look worse for light mode, but at least be viewable for dark mode.
+
+I'll post any updates on this issue [here](https://github.com/andyruwruw/andyruwruw/issues/3), and an official Github issue is posted [here](https://github.community/t/support-theme-context-for-images-in-light-vs-dark-mode/147981).

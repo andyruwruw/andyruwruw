@@ -1,4 +1,7 @@
-const paths: Array<ISkillPath> = [
+// Types
+import { ISVGPath } from '../../../types/general';
+
+const ICON_SVG_PATH: ISVGPath[] = [
   {
     type: 'path',
     fill: '#CB6699',
@@ -9,4 +12,4 @@ const paths: Array<ISkillPath> = [
   },
 ];
 
-export default paths;
+export default ICON_SVG_PATH;

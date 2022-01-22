@@ -1,13 +1,25 @@
+// Packages
+import React from 'react';
 
-import React from "react";
+// Types
+import { ISVGPath } from '../../types/general';
 
 interface IconParameters {
-  height: string,
-  name: string,
-  skill: Array<ISkillPath>,
-  width: string,
+  height: string;
+  name: string;
+  skill: ISVGPath[];
+  width: string;
 }
 
+/**
+ * Displays a given icon based on SVG path data.
+ *
+ * @param {string} height Height of the icon.
+ * @param {string} name Name of the icon.
+ * @param {ISVGPath[]} skill List of SVG paths to display.
+ * @param {string} width Width of the icon.
+ * @returns {React.FC} Functional React component.
+ */
 const Icon: React.StatelessComponent<IconParameters> = ({
   height,
   name,

@@ -6,14 +6,14 @@ hello! here's a little about me:
 
 <!-- Nothing weird to see here -->
 <p align="center">
-  <a href="https://andyruwruw.vercel.app/api/now-playing?open">
+  <a href="https://readme.andyruwruw.com/api/now-playing?open">
     <!-- Music bars move to the beat and are colored based on the track's happiness, danceability and energy! -->
-    <img src="https://andyruwruw.vercel.app/api/now-playing">
+    <img src="https://readme.andyruwruw.com/api/now-playing">
   </a>
 </p>
 
 <p align="center">
-  <img src="https://andyruwruw.vercel.app/api/top-played">
+  <img src="https://readme.andyruwruw.com/api/top-played">
 </p>
  
 <p align="center">
@@ -29,7 +29,7 @@ hello! here's a little about me:
 
 <p align="center">
   <a href="https://www.chess.com/member/andyruwruw">
-    <img src="https://andyruwruw.vercel.app/api/chess-games">
+    <img src="https://readme.andyruwruw.com/api/chess-games">
   </a>
 </p>
 
@@ -44,5 +44,5 @@ hello! here's a little about me:
 </h1>
 
 <p align="center">
-  <img src="https://andyruwruw.vercel.app/api/skills">
+  <img src="https://readme.andyruwruw.com/api/skills">
 </p>

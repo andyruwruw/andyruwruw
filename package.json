@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "vercel dev",
-    "token": "tsc util/get-refresh-token.ts & node util/get-refresh-token.js"
+    "token": "tsc util/get-refresh-token.ts & node util/get-refresh-token.js",
+    "lint": "eslint . --ext .ts,.tsx --fix"
   },
   "repository": {
     "type": "git",
@@ -21,11 +22,18 @@
     "@vercel/node": "^1.9.1",
     "axios": "^0.21.1",
     "chess-web-api": "^1.0.10",
+    "dotenv": "^14.2.0",
     "isomorphic-unfetch": "^3.0.0",
     "node-fetch": "^2.6.1",
     "querystring": "^0.2.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "typescript": "^3.9.7"
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.0",
+    "@typescript-eslint/parser": "^5.10.0",
+    "eslint": "^7.32.0",
+    "jest": "^27.4.7",
+    "typescript": "^3.9.10"
   }
 }

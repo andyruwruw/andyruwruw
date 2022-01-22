@@ -1,18 +1,25 @@
+// Packages
 import React from 'react';
 
-import ConvertSVG from '../ConvertSVG';
-import Text from '../Text';
+// Local Imports
+import ConvertSVG from '../general/ConvertSVG';
+import { CURRENT_GAMES_CSS } from './config';
+import Text from '../general/Text';
 
-export interface ICurrentGamesParameters {
-  games: Array<IConvertedGame>;
-  pieceImages: object;
-};
+// Types
+import { IConvertedGameObject } from '../../types/chess';
+
+interface ICurrentGamesParameters {
+  games: IConvertedGameObject[];
+  pieceImages: Record<string, string>;
+}
 
 /**
- * Returns image of 3 chess game positions
+ * Returns image of three chess game positions.
  *
- * @param {Array<ICurrentDailyGames>} games
- * @param {object} pieceImages
+ * @param {IConvertedGameObject[]} games Games to be displayed.
+ * @param {Record<string, string>} pieceImages base64 images of pieces.
+ * @returns {React.FC} Functional React component.
  */
 export const CurrentGames: React.FC<ICurrentGamesParameters> = ({
   games,
@@ -64,56 +71,7 @@ export const CurrentGames: React.FC<ICurrentGamesParameters> = ({
       </div>
       
       <style>
-        {`
-          .games-wrapper {
-            display: flex;
-            justify-content: space-around;
-          }
-          
-          #title {
-            margin: .5rem;
-            text-align: center;
-          }
-          
-          .board {
-            border-radius: .5rem;
-            overflow: hidden;
-          }
-          
-          .row {
-            display: flex;
-          }
-          
-          .col {
-            align-items: center;
-            background: #B58863;
-            display: flex;
-            height: 22px;
-            justify-content: center;
-            width: 22px;
-          }
-
-          .col.empty {
-            background: #DDDDDDAA;
-          }
-          
-          .col.light {
-            background: #F0D9B5;
-          }
-
-          .col.light.empty {
-            background: #EEEEEEAA;
-          }
-          
-          .col img {
-            width: 90%;
-          }
-          
-          .username {
-            text-align: center;
-            margin-top: 6px;
-          }
-        `}
+        { CURRENT_GAMES_CSS }
       </style>
     </ConvertSVG>
   );

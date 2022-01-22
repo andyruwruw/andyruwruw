@@ -1,16 +1,23 @@
+// Packages
 import React from 'react';
 
-import ConvertSVG from '../ConvertSVG';
+// Local Imports
+import {
+  PATHS,
+  SKILLS_CSS,
+} from './config';
+import ConvertSVG from '../general/ConvertSVG';
 import Icon from './Icon';
-import { paths } from './config';
-
 
 export interface ISkillsParameters {
-  skills: Array<string>
-};
+  skills: string[];
+}
 
 /**
- * Displays various SVG icons
+ * Component for various SVG icons.
+ * 
+ * @param {string[]} skills List of skills to display.
+ * @returns {React.FC} Functional React component.
  */
 export const Skills: React.FC<ISkillsParameters> = ({ skills }: ISkillsParameters) => {
   return (
@@ -22,26 +29,12 @@ export const Skills: React.FC<ISkillsParameters> = ({ skills }: ISkillsParameter
           <Icon
             key={ `icon-${ skillName }` }
             name={ skillName }
-            skill={ paths[skillName] } />
+            skill={ PATHS[skillName] } />
         ))}
       </div>
       
       <style>
-        {`
-          #icon-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-          }
-          
-          #icon-wrapper svg {
-            background: rgba(250, 250, 250, .2);
-            border: 1px solid rgba(0,0,0,.01);
-            border-radius: 12px;
-            box-shadow: 2px 2px 2px rgba(0,0,0,.2), -1px -1px 1px rgba(0,0,0,.05);
-            margin: 12px;
-            padding: 8px;
-          }
-        `}
+        { SKILLS_CSS }
       </style>
     </ConvertSVG>
   );

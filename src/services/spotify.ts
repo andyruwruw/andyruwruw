@@ -1,47 +1,93 @@
+// Packages
 import fetch from 'isomorphic-unfetch';
 import { stringify } from 'querystring';
 
-const {
-  SPOTIFY_CLIENT_ID: client_id,
-  SPOTIFY_CLIENT_SECRET: client_secret,
-  SPOTIFY_REFRESH_TOKEN: refresh_token,
-} = process.env;
+// Local Imports
+import {
+  SPOTIFY_AUTHORIZATION,
+  SPOTIFY_AUTHORIZATION_URL,
+  SPOTIFY_CURRENT_PLAYING_URL,
+  SPOTIFY_GET_TRACK_AUDIO_FEATURES_URL,
+  SPOTIFY_GET_TRACK_URL,
+  SPOTIFY_GET_TOP_PLAYED_URL,
+  SPOTIFY_RECENTLY_PLAYED_URL,
+  SPOTIFY_REFRESH_TOKEN,
+} from '../config';
+import { getImageData } from './general';
 
-const basic: string = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
-const Authorization: string = `Basic ${basic}`;
+// Types
+import {
+  IAudioFeaturesResponse,
+  IAuthorizationTokenResponse,
+  IConvertedTrackObject,
+  ICurrentlyPlayingResponse,
+  ICursorBasedPagingObject,
+  IPagingObject,
+  IPlayHistoryObject,
+  ITrackObject,
+} from '../types/spotify';
+
+let AuthorizationToken = null;
 
 /**
  * Uses my refresh token to get a brand new spotify auth token!
  *
- * @returns {Promise<string>} Authorization header for Spotify requests
+ * @returns {Promise<string>} Authorization header for Spotify requests.
  */
-async function getAuthorizationToken(): Promise<string> {
-  const url: URL = new URL('https://accounts.spotify.com/api/token');
+const getAuthorizationToken = async (): Promise<string> => {
+  if (AuthorizationToken !== null) {
+    return AuthorizationToken;
+  }
+
+  const GRANT_TYPE = 'refresh_token';
+  const CONTENT_TYPE = 'application/x-www-form-urlencoded';
+
   const body: string = stringify({
-    grant_type: 'refresh_token',
-    refresh_token,
+    grant_type: GRANT_TYPE,
+    SPOTIFY_REFRESH_TOKEN,
   });
 
-  const response: IAuthorizationTokenResponse = await fetch(`${url}`, {
+  const response: IAuthorizationTokenResponse = await fetch(`${SPOTIFY_AUTHORIZATION_URL}`, {
     method: 'POST',
     headers: {
-      Authorization,
-      'Content-Type': 'application/x-www-form-urlencoded',
+      SPOTIFY_AUTHORIZATION,
+      'Content-Type': CONTENT_TYPE,
     },
     body,
   }).then((r) => r.json());
 
-  return `Bearer ${response.access_token}`;
+  AuthorizationToken = `Bearer ${response.access_token}`
+
+  return AuthorizationToken;
 }
 
 /**
- * Requests currently playing track from Spotify
+ * Generates a Currently Playing response for edge cases.
  *
- * @returns {Promise<ICurrentlyPlayingResponse | object>} Currently Playing Spotify Object
+ * @param {string} Authorization Authorization header for Spotify requests.
+ * @param {ITrackObject | null} [track = null] Track object to use for response.
+ * @returns {ICurrentlyPlayingResponse} Currently playing response.
  */
-export async function nowPlaying(): Promise<ICurrentlyPlayingResponse> {
+const defaultCurrentlyPlayingResponse = (Authorization: string, track: ITrackObject = null): ICurrentlyPlayingResponse => ({
+  context: null,
+  timestamp: 0,
+  progress_ms: 0,
+  is_playing: false,
+  item: track,
+  currently_playing_type: '',
+  actions: {},
+  Authorization,
+});
+
+/**
+ * Requests currently playing track from Spotify.
+ *
+ * @returns {Promise<ICurrentlyPlayingResponse | object>} Currently Playing Spotify Object.
+ */
+export const getNowPlaying = async (): Promise<ICurrentlyPlayingResponse> => {
   const Authorization: string = await getAuthorizationToken();
-  const response: Response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
+
+  const response: Response = await fetch(SPOTIFY_CURRENT_PLAYING_URL, {
     headers: {
       Authorization,
     },
@@ -55,16 +101,7 @@ export async function nowPlaying(): Promise<ICurrentlyPlayingResponse> {
 
     return data;
   } else {
-    return {
-      context: null,
-      timestamp: 0,
-      progress_ms: 0,
-      is_playing: false,
-      item: null,
-      currently_playing_type: '',
-      actions: {},
-      Authorization,
-    };
+    return defaultCurrentlyPlayingResponse(Authorization);
   }
 };
 
@@ -73,8 +110,10 @@ export async function nowPlaying(): Promise<ICurrentlyPlayingResponse> {
  *
  * @returns {Promise<ICursorBasedPagingObject | object>} Currently Playing Spotify Object
  */
-export async function lastPlayed(Authorization: string): Promise<ICurrentlyPlayingResponse> {
-  const response: Response = await fetch('https://api.spotify.com/v1/me/player/recently-played?limit=1', {
+export const getLastPlayed = async (): Promise<ICurrentlyPlayingResponse> => {
+  const Authorization: string = await getAuthorizationToken();
+
+  const response: Response = await fetch(SPOTIFY_RECENTLY_PLAYED_URL, {
     headers: {
       Authorization,
     },
@@ -85,7 +124,7 @@ export async function lastPlayed(Authorization: string): Promise<ICurrentlyPlayi
   if (status === 200) {
     const data: ICursorBasedPagingObject<IPlayHistoryObject> = await response.json();
 
-    const trackResponse: Response = await fetch(`https://api.spotify.com/v1/tracks/${ data.items[0].track.id }`, {
+    const trackResponse: Response = await fetch(`${SPOTIFY_GET_TRACK_URL}/${ data.items[0].track.id }`, {
       headers: {
         Authorization,
       },
@@ -93,36 +132,21 @@ export async function lastPlayed(Authorization: string): Promise<ICurrentlyPlayi
 
     const track: ITrackObject = await trackResponse.json();
 
-    return {
-      context: null,
-      timestamp: 1,
-      progress_ms: 0,
-      is_playing: false,
-      item: track,
-      currently_playing_type: 'track',
-      actions: {},
-      Authorization,
-    }
+    return defaultCurrentlyPlayingResponse(Authorization, track);
   }
-  return {
-    context: null,
-    timestamp: 0,
-    progress_ms: 0,
-    is_playing: false,
-    item: null,
-    currently_playing_type: '',
-    actions: {},
-    Authorization,
-  };
+  return defaultCurrentlyPlayingResponse(Authorization);
 };
 
 /**
- * Requests a track's audio features from Spotify
+ * Requests a track's audio features from Spotify.
  *
- * @returns {Promise<IAudioFeaturesResponse | object>} Audio features object
+ * @param {string} id Spotify track id.
+ * @returns {Promise<IAudioFeaturesResponse | object>} Audio features object.
  */
-export async function trackAudioFeatures(id: string, Authorization: string): Promise<IAudioFeaturesResponse | object> {
-  const response: Response = await fetch(`https://api.spotify.com/v1/audio-features/${id}`, {
+export const getTracksAudioFeatures = async (id: string): Promise<IAudioFeaturesResponse | object> => {
+  const Authorization: string = await getAuthorizationToken();
+
+  const response: Response = await fetch(`${SPOTIFY_GET_TRACK_AUDIO_FEATURES_URL}/${id}`, {
     headers: {
       Authorization,
     },
@@ -138,14 +162,15 @@ export async function trackAudioFeatures(id: string, Authorization: string): Pro
 };
 
 /**
- * Requests top played tracks from Spotify
+ * Requests top played tracks from Spotify.
  *
- * @param {string} timeRange Spotify param for top played time range
- * @returns {Promise<Array<ITrackObject>>} Array of Spotify track objects
+ * @param {string} timeRange Spotify parameter for top played time range.
+ * @returns {Promise<ITrackObject[]>} Array of Spotify track objects.
  */
-export async function topPlayed(timeRange: string): Promise<Array<ITrackObject>> {
+export const getTopPlayed = async (timeRange: string): Promise<ITrackObject[]> => {
   const Authorization: string = await getAuthorizationToken();
-  const response: Response = await fetch(`https://api.spotify.com/v1/me/top/tracks?limit=5&time_range=${timeRange}`, {
+
+  const response: Response = await fetch(`${SPOTIFY_GET_TOP_PLAYED_URL}${timeRange}`, {
     headers: {
       Authorization,
     },
@@ -159,4 +184,40 @@ export async function topPlayed(timeRange: string): Promise<Array<ITrackObject>>
   } else {
     return [];
   }
+};
+
+/**
+ * Removes data and simplifies track object.
+ *
+ * @param {ITrackObject} track Track object to be converted.
+ * @returns {Promise<IConvertedTrackObject>} Converted track object.
+ */
+export const convertTrackToMinimumData = async (track: ITrackObject): Promise<IConvertedTrackObject> => {
+  let albumArtUrl = 'https://raw.githubusercontent.com/andyruwruw/andyruwruw/master/src/assets/images/default-album-art.png';
+  if ('album' in track && 'images' in track.album && track.album.images.length) {
+    albumArtUrl = track.album.images[0].url;
+  }
+  const image = await getImageData(albumArtUrl);
+
+  let artist = 'Unknown Artist';
+  if ('artists' in track && track.artists.length) {
+    artist = track.artists.map((artist) => artist.name).join(', ');
+  }
+
+  let name = 'Unknown Track';
+  if ('name' in track) {
+    name = track.name;
+  }
+
+  let href = '#';
+  if ('external_urls' in track && 'spotify' in track.external_urls) {
+    href = track.external_urls.spotify;
+  }
+
+  return {
+    image,
+    artist,
+    name,
+    href,
+  };
 };

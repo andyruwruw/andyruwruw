@@ -1,3 +1,29 @@
+# v1.1.2 - January 21, 2022
+
+**Organization and Linting**
+
+Reorganized files.
+Added documentation.
+Added linting.
+Added Github Workflow for CI.
+
+**Default Art**
+
+Art is now processed in the same function.
+Blank image used if none available.
+
+**Locked Endpoints**
+
+Ensured `/api/auth` and `/api/login` are only available in `NODE_ENV=development`.
+
+**Prettier Login**
+
+Login now sends back React component.
+
+**Custom URL**
+
+URL for API changed.
+
 # v1.1.1 - April 28, 2021
 
 **Added Skill**

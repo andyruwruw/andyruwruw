@@ -25,7 +25,6 @@ import { IConvertedGameObject } from '../../types/chess';
  * @param {VercelResponse} res Response to request.
  */
 export default async function (req: VercelRequest, res: VercelResponse) {
-  console.log('hello');
   const pieceImages: object = await getPieces();
 
   // Using an awesome library called chess-web-api to get our data ;)

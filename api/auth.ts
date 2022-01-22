@@ -1,8 +1,10 @@
+// Packages
 import {
   VercelRequest,
   VercelResponse,
 } from '@vercel/node';
 
+// Local Imports
 import authHandler from '../src/handlers/development/auth';
 
 /**

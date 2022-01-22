@@ -1,5 +1,5 @@
 // Packages
-import fetch from 'isomorphic-unfetch';
+import fetch from 'node-fetch';
 import { stringify } from 'querystring';
 
 // Local Imports
@@ -27,7 +27,7 @@ import {
   ITrackObject,
 } from '../types/spotify';
 
-let AuthorizationToken = null;
+let AuthorizationToken: null | string = null;
 
 /**
  * Uses my refresh token to get a brand new spotify auth token!
@@ -44,13 +44,13 @@ const getAuthorizationToken = async (): Promise<string> => {
 
   const body: string = stringify({
     grant_type: GRANT_TYPE,
-    SPOTIFY_REFRESH_TOKEN,
+    refresh_token: SPOTIFY_REFRESH_TOKEN,
   });
 
   const response: IAuthorizationTokenResponse = await fetch(`${SPOTIFY_AUTHORIZATION_URL}`, {
     method: 'POST',
     headers: {
-      SPOTIFY_AUTHORIZATION,
+      'Authorization': SPOTIFY_AUTHORIZATION,
       'Content-Type': CONTENT_TYPE,
     },
     body,

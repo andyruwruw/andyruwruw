@@ -5,6 +5,7 @@ import {
 } from '@vercel/node';
 import axios, { AxiosResponse } from 'axios';
 import querystring, { ParsedUrlQueryInput } from 'querystring';
+import { renderToString } from 'react-dom/server';
 
 // Local Imports
 import {
@@ -15,6 +16,8 @@ import {
   SPOTIFY_AUTHORIZATION_URL,
   STATE,
 } from '../../config';
+import { Auth } from '../../components/general/Auth';
+import { convertToImageResponse } from '../../services/general';
 
 /**
  * Retrieves access token, for author during development only.
@@ -56,13 +59,20 @@ export default async function (req: VercelRequest, res: VercelResponse) {
       options,
     );
 
-    const result = {
-      refresh_token: response.data.refresh_token,
-      access_token: response.data.access_token,
-    };
+    const {
+      refresh_token: refreshToken,
+    } = response.data;
 
-    return res.send(result);
+    // Hey! I'm returning an image!
+    convertToImageResponse(res);
+
+    // Generating the component and rendering it
+    const text: string = renderToString(Auth({
+      refreshToken,
+    }));
+
+    return res.send(text);
   }
 
-  return res.send(false);
+  throw new Error('Invalid request: State did not match or code not provided.');
 }

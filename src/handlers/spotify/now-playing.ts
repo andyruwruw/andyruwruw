@@ -67,9 +67,6 @@ export default async function (req: VercelRequest, res: VercelResponse) {
       audioFeatures = await getTracksAudioFeatures(item.id);
     }
 
-    // Hey! I'm returning an image!
-    convertToImageResponse(res);
-
     // Minimum data for the track.
     const track = await convertTrackToMinimumData(item);
 
@@ -77,6 +74,9 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     const {
       duration_ms: duration,
     } = item;
+
+    // Hey! I'm returning an image!
+    convertToImageResponse(res);
 
     // Generating the component and rendering it
     const text: string = renderToString(Player({

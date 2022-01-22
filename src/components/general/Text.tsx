@@ -42,7 +42,6 @@ const Text: React.FC<ITextParameters> = ({
         fontSize: `${TEXT_SIZES[size]}px`,
         fontWeight: TEXT_WEIGHTS[weight],
         lineHeight: 1.5,
-        whiteSpace: 'pre',
       }}
       { ...props }>
       { children }

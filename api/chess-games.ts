@@ -16,8 +16,7 @@ import { ERROR_MESSAGE_500 } from '../src/config';
  */
 export default async function (req: VercelRequest, res: VercelResponse) {
   try {
-    console.log('starting');
-    await chessGamesHandler(req, res);
+    return await chessGamesHandler(req, res);
   } catch (error) {
     console.error(error);
     return res.status(500).send(ERROR_MESSAGE_500);

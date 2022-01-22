@@ -1,5 +1,6 @@
 // Packages
 import { VercelResponse } from '@vercel/node';
+import fetch from 'node-fetch';
 
 // Local Imports
 import {

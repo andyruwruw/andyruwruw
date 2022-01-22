@@ -6,6 +6,35 @@ export const CONVERT_SVG_CSS = `
   margin: 0;
   box-sizing: border-box;
 }
+
+#auth-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+#title {
+  text-align: center;
+}
+
+#token {
+  width: 400px;
+  text-align: center;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+`;
+
+/**
+ * Style for Auth component.
+ */
+export const AUTH_CSS = `
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
 `;
 
 /**

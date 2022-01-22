@@ -20,7 +20,7 @@
   "homepage": "https://github.com/andyruwruw/andyruwruw#readme",
   "dependencies": {
     "@vercel/node": "^1.9.1",
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "chess-web-api": "^1.0.10",
     "dotenv": "^14.2.0",
     "isomorphic-unfetch": "^3.0.0",

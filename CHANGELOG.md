@@ -1,3 +1,14 @@
+# v1.2.0 - June 17, 2022
+
+**Organization**
+
+Condensed environmental variables into static class.
+API related methods are now in one object.
+
+**Mock Data**
+
+Added the ability to use mock data instead of live data.
+
 # v1.1.2 - January 21, 2022
 
 **Organization and Linting**

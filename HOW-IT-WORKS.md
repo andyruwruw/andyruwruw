@@ -133,3 +133,16 @@ Sadly, IT DOESN'T WORK with my SVG images.
 Best solution is to pick colors that work for dark and light modes, making it arguably look worse for light mode, but at least be viewable for dark mode.
 
 I'll post any updates on this issue [here](https://github.com/andyruwruw/andyruwruw/issues/3), and an official Github issue is posted [here](https://github.community/t/support-theme-context-for-images-in-light-vs-dark-mode/147981).
+
+# Mock Data
+
+This profile README has been awesome and I've loved having it up, however having my Spotify current listening public to all 24/7 and requirement to keep chess games going to have it show anything has become a burden. I added a `.env` variable that informs the server to use mock data instead. So from now on, the data displayed is outdated mock data and serves as more a proof of concept than a legitemate display of my Spotify and Chess.com data.
+
+This is done by setting the following `.env` variable to `true`.
+
+```
+# Inside .env
+MOCK_DATA=true
+```
+
+Any other value besides true will tell the server to request real data.

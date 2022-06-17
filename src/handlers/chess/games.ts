@@ -6,14 +6,14 @@ import {
 import { renderToString } from 'react-dom/server';
 
 // Local Imports
-import { convertToImageResponse } from '../../services/general';
-import { CurrentGames } from '../../components/chess/CurrentGames';
 import {
-  getCurrentGames,
   getPieces,
   convertGameObject,
   createEmptyGameObject,
-} from '../../services/chess';
+} from '../../helpers/chess';
+import { convertToImageResponse } from '../../helpers/image';
+import { CurrentGames } from '../../components/chess/CurrentGames';
+import api from '../../api';
 
 // Types
 import { IConvertedGameObject } from '../../types/chess';
@@ -24,13 +24,16 @@ import { IConvertedGameObject } from '../../types/chess';
  * @param {VercelRequest} req Request for image.
  * @param {VercelResponse} res Response to request.
  */
-export default async function (req: VercelRequest, res: VercelResponse) {
+export default async function (
+  req: VercelRequest,
+  res: VercelResponse,
+) {
   const pieceImages: object = await getPieces();
 
   // Using an awesome library called chess-web-api to get our data ;)
   const {
     games = [],
-  } = await getCurrentGames();
+  } = await api.chess.getCurrentGames();
 
   // Limiting the width of the games.
   games.length = Math.min(

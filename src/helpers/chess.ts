@@ -1,55 +1,27 @@
-// Packages
-import ChessWebAPI from 'chess-web-api';
-
 // Local Imports
 import {
   CHESS_COLORS,
-  CHESS_COM_USERNAME,
   CHESS_PIECES,
   EMPTY_CHESS_BOARD_FEN,
   GITHUB_CHESS_IMAGES_DIRECTORY_URL,
 } from '../config';
-import { getImageData } from './general';
+import { Environment } from '../helpers/environment';
+import { getImageData } from './image';
 
 // Types
 import {
   IConvertedGameObject,
   ICurrentDailyGame,
-  ICurrentDailyGames,
-  ICurrentDailyGamesResponse,
 } from '../types/chess';
 
 /**
- * Instance of chess-web-api.
- */
-const chessAPI = new ChessWebAPI();
-
-/**
- * Default value for current daily games with no available games.
- */
-const defaultCurrentDailyGames: ICurrentDailyGames = {
-  games: [] as ICurrentDailyGame[],
-};
-
-/**
- * Requests current daily games from Chess.com.
+ * Converts recieved game objects to simplified objects.
  *
- * @returns {Promise<ICurrentDailyGames>} Object with array of game objects.
+ * @param {ICurrentDailyGame} game Recieved game object.
+ * @returns {IConvertedGameObject} Converted game object.
  */
-export const getCurrentGames = async (): Promise<ICurrentDailyGames> =>{
-  const response: ICurrentDailyGamesResponse = await chessAPI.getPlayerCurrentDailyChess(CHESS_COM_USERNAME);
-
-  const { statusCode } = response;
-
-  if (statusCode === 200) {
-    return response.body;
-  } else {
-    return defaultCurrentDailyGames;
-  }
-};
-
 export const convertGameObject = (game: ICurrentDailyGame): IConvertedGameObject => {
-  const isWhite: boolean = game.white.includes(CHESS_COM_USERNAME);
+  const isWhite: boolean = game.white.includes(Environment.getChessUsername());
   const white: string = (game.white.split('/').reverse())[0];
   const black: string = (game.black.split('/').reverse())[0];
 
@@ -62,6 +34,11 @@ export const convertGameObject = (game: ICurrentDailyGame): IConvertedGameObject
   };
 };
 
+/**
+ * Creates an empty game object.
+ *
+ * @returns {IConvertedGameObject} Empty game object.
+ */
 export const createEmptyGameObject = (): IConvertedGameObject => ({
   black: null,
   isWhite: true,

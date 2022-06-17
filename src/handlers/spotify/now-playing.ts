@@ -10,15 +10,11 @@ import {
 import { renderToString } from 'react-dom/server';
 
 // Local Imports
-import {
-  convertTrackToMinimumData,
-  getNowPlaying,
-  getLastPlayed,
-  getTracksAudioFeatures,
-} from '../../services/spotify';
-import { convertToImageResponse } from '../../services/general';
+import { convertTrackToMinimumData } from '../../helpers/spotify';
+import { convertToImageResponse } from '../../helpers/image';
 import { ERROR_MESSAGE_500 } from '../../config';
 import { Player } from '../../components/spotify/NowPlaying';
+import api from '../../api';
 
 // Types
 import { IAudioFeaturesResponse } from '../../types/spotify';
@@ -29,10 +25,13 @@ import { IAudioFeaturesResponse } from '../../types/spotify';
  * @param {VercelRequest} req Request for image.
  * @param {VercelResponse} res Response to request.
  */
-export default async function (req: VercelRequest, res: VercelResponse) {
+export default async function (
+  req: VercelRequest,
+  res: VercelResponse,
+) {
   try {
     // Get current playing item.
-    const nowPlaying = await getNowPlaying();
+    const nowPlaying = await api.spotify.getNowPlaying();
 
     let { item } = nowPlaying;
     const {
@@ -42,7 +41,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
 
     // Get last played if it's not playing.
     if (!item) {
-      const response = await getLastPlayed();
+      const response = await api.spotify.getLastPlayed();
       item = response.item;
     }
 
@@ -64,7 +63,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     let audioFeatures: IAudioFeaturesResponse | object = null;
 
     if (Object.keys(item).length) {
-      audioFeatures = await getTracksAudioFeatures(item.id);
+      audioFeatures = await api.spotify.getTracksAudioFeatures(item.id);
     }
 
     // Minimum data for the track.

@@ -6,7 +6,7 @@ import {
 import { renderToString } from 'react-dom/server';
 
 // Local Imports
-import { convertToImageResponse } from '../../services/general';
+import { convertToImageResponse } from '../../helpers/image';
 import { SKILL_KEYS } from '../../config';
 import { Skills } from '../../components/skills/Skills';
 
@@ -16,7 +16,10 @@ import { Skills } from '../../components/skills/Skills';
  * @param {VercelRequest} req Request for image.
  * @param {VercelResponse} res Response to request.
  */
-export default async function (req: VercelRequest, res: VercelResponse) {
+export default async function (
+  req: VercelRequest,
+  res: VercelResponse,
+) {
   // Hey! I'm returning an image!
   convertToImageResponse(res);
   

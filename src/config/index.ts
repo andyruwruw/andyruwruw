@@ -1,36 +1,7 @@
 import dotenv from 'dotenv';
+import { Environment } from '../helpers/environment';
 
 dotenv.config();
-
-/**
- * Chess.com username to request daily games from.
- */
-export const CHESS_COM_USERNAME = process.env.CHESS_COM_USERNAME || 'andyruwruw';
-
-/**
- * Current environment.
- */
-export const NODE_ENV: string = process.env.NODE_ENV || 'development';
-
-/**
- * Spotify client id for API access.
- */
-export const SPOTIFY_CLIENT_ID: string = process.env.SPOTIFY_CLIENT_ID;
-
-/**
- * Spotify client secret for API access.
- */
-export const SPOTIFY_CLIENT_SECRET: string = process.env.SPOTIFY_CLIENT_SECRET;
-
-/**
- * Spotify refresh token for user.
- */
-export const SPOTIFY_REFRESH_TOKEN: string = process.env.SPOTIFY_REFRESH_TOKEN;
-
-/**
- * State for Spotify API.
- */
-export const STATE: string = process.env.STATE || 'some_random_string';
 
 /**
  * Callback URL for Spotify authorization.
@@ -80,7 +51,7 @@ export const SPOTIFY_RECENTLY_PLAYED_URL = 'https://api.spotify.com/v1/me/player
 /**
  * Spotify authorization header.
  */
-export const SPOTIFY_AUTHORIZATION = `Basic ${Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64')}`;
+export const SPOTIFY_AUTHORIZATION = `Basic ${Buffer.from(`${Environment.getSpotifyClientId()}:${Environment.getSpotifyClientSecret()}`).toString('base64')}`;
 
 /**
  * Spotify authorization url.

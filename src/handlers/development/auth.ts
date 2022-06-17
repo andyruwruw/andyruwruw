@@ -3,21 +3,20 @@ import {
   VercelRequest,
   VercelResponse,
 } from '@vercel/node';
+import { renderToString } from 'react-dom/server';
 import axios, { AxiosResponse } from 'axios';
 import querystring, { ParsedUrlQueryInput } from 'querystring';
-import { renderToString } from 'react-dom/server';
 
 // Local Imports
 import {
   CALLBACK_URL,
   ERROR_MESSAGE_405,
-  NODE_ENV,
   SPOTIFY_AUTHORIZATION,
   SPOTIFY_AUTHORIZATION_URL,
-  STATE,
 } from '../../config';
 import { Auth } from '../../components/general/Auth';
-import { convertToImageResponse } from '../../services/general';
+import { convertToImageResponse } from '../../helpers/image';
+import { Environment } from '../../helpers/environment';
 
 /**
  * Retrieves access token, for author during development only.
@@ -25,9 +24,12 @@ import { convertToImageResponse } from '../../services/general';
  * @param {VercelRequest} req Request for login URL.
  * @param {VercelResponse} res Response to request.
  */
-export default async function (req: VercelRequest, res: VercelResponse) {
+export default async function (
+  req: VercelRequest,
+  res: VercelResponse,
+) {
   // Block when not in development environment.
-  if (NODE_ENV !== 'development') {
+  if (Environment.getEnvironment() !== 'development') {
     return res.status(405).send(ERROR_MESSAGE_405);
   }
 
@@ -39,7 +41,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     state,
   } = req.query;
 
-  if (code && state && state === STATE) {
+  if (code && state && state === Environment.getState()) {
     const data: ParsedUrlQueryInput = {
       code,
       redirect_uri: CALLBACK_URL,

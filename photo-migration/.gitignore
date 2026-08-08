@@ -1,0 +1,10 @@
+# OAuth + runtime state -- never commit these
+credentials.json
+token.json
+manifest.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

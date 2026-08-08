@@ -1,0 +1,6 @@
+google-api-python-client>=2.120.0
+google-auth>=2.29.0
+google-auth-oauthlib>=1.2.0
+requests>=2.31.0
+Pillow>=10.0.0
+piexif>=1.1.3

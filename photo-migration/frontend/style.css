@@ -1,0 +1,101 @@
+:root {
+  --bg: #0f1216;
+  --panel: #171c22;
+  --panel-2: #1e252d;
+  --text: #e6eaef;
+  --muted: #8a95a3;
+  --border: #2a323c;
+  --accent: #4c8dff;
+  --ok: #35c46a;
+  --warn: #f5b642;
+  --err: #f0616d;
+  --radius: 10px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f5f7fa; --panel: #ffffff; --panel-2: #f0f3f7; --text: #1a2029;
+    --muted: #5c6675; --border: #dde3ea; --accent: #2f6ff0;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+header { padding: 24px 20px 8px; max-width: 900px; margin: 0 auto; }
+h1 { margin: 0 0 4px; font-size: 22px; }
+.sub { color: var(--muted); margin: 0; }
+main { max-width: 900px; margin: 0 auto; padding: 16px 20px 60px; display: grid; gap: 20px; }
+
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
+h2 { margin: 0 0 12px; font-size: 17px; }
+h3 { margin: 22px 0 10px; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+
+.row { display: flex; gap: 8px; flex-wrap: wrap; }
+input {
+  background: var(--panel-2); border: 1px solid var(--border); color: var(--text);
+  padding: 9px 11px; border-radius: 8px; font-size: 14px; flex: 1; min-width: 140px;
+}
+input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+button {
+  background: var(--accent); color: #fff; border: 0; padding: 9px 15px;
+  border-radius: 8px; font-size: 14px; cursor: pointer; font-weight: 600;
+}
+button:hover { filter: brightness(1.08); }
+button.ghost { background: var(--panel-2); color: var(--text); border: 1px solid var(--border); }
+button:disabled { opacity: .45; cursor: not-allowed; }
+
+.job-list { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 8px; }
+.job-list li {
+  display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  padding: 10px 12px; background: var(--panel-2); border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer;
+}
+.job-list li.active { outline: 2px solid var(--accent); }
+.job-list .jn { font-weight: 600; }
+.job-list .jm { color: var(--muted); font-size: 13px; }
+
+.detail-head { display: flex; align-items: center; gap: 12px; }
+.badge, .pill {
+  font-size: 12px; padding: 3px 9px; border-radius: 999px; background: var(--panel-2);
+  border: 1px solid var(--border); color: var(--muted); font-weight: 600;
+}
+.badge.running { color: var(--accent); border-color: var(--accent); }
+.badge.completed { color: var(--ok); border-color: var(--ok); }
+.badge.paused, .badge.waiting_for_input { color: var(--warn); border-color: var(--warn); }
+.badge.failed { color: var(--err); border-color: var(--err); }
+
+.controls { display: flex; gap: 8px; margin: 14px 0; flex-wrap: wrap; }
+
+.progress { margin: 8px 0 4px; }
+.bar { height: 12px; background: var(--panel-2); border-radius: 999px; overflow: hidden; border: 1px solid var(--border); }
+.bar-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--accent), var(--ok)); transition: width .4s ease; }
+.progress-text { color: var(--muted); font-size: 13px; margin-top: 6px; }
+
+.counts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.chip { font-size: 13px; padding: 4px 10px; border-radius: 8px; background: var(--panel-2); border: 1px solid var(--border); }
+.chip b { font-variant-numeric: tabular-nums; }
+
+.questions { display: grid; gap: 10px; }
+.q {
+  background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; padding: 12px;
+}
+.q.blocking { border-left: 3px solid var(--warn); }
+.q .prompt { margin-bottom: 9px; }
+.q .qrow { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.q input { max-width: 120px; flex: 0 0 auto; }
+.muted { color: var(--muted); }
+
+.failures { display: grid; gap: 6px; }
+.fail { font-size: 13px; padding: 8px 10px; background: var(--panel-2); border: 1px solid var(--border); border-radius: 8px; }
+.fail .fn { font-weight: 600; }
+.fail .fe { color: var(--err); }
+.toast {
+  position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%);
+  background: var(--panel); border: 1px solid var(--border); padding: 10px 16px;
+  border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.3); opacity: 0; transition: opacity .2s;
+}
+.toast.show { opacity: 1; }
+.toast.err { border-color: var(--err); color: var(--err); }

@@ -53,8 +53,8 @@ def _load_or_authorize(client_secret: str, token_file: str) -> Credentials:
 
 
 def get_clients(
-    client_secret: str = config.DEFAULT_CLIENT_SECRET,
-    token_file: str = config.DEFAULT_TOKEN_FILE,
+    client_secret: str = config.CLIENT_SECRET,
+    token_file: str = config.TOKEN_FILE,
 ) -> Clients:
     """Authorize once and return Drive + Photos clients."""
     creds = _load_or_authorize(client_secret, token_file)

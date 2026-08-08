@@ -1,7 +1,9 @@
-# OAuth + runtime state -- never commit these
+# OAuth secrets + runtime state -- never commit
 credentials.json
 token.json
-manifest.json
+photo_migration.db
+photo_migration.db-wal
+photo_migration.db-shm
 
 # Python
 __pycache__/

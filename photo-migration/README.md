@@ -1,100 +1,112 @@
 # photo-migration
 
-A small, resumable tool that copies photos from **Google Drive** (organized in
-per-year folders) into **Google Photos**, optionally stamping EXIF **date** and
-**GPS location** onto photos that are missing it.
-
-> Built as a standalone utility — it does not touch the profile-page app in the
-> rest of this repo.
-
-## What it does
+A small self-hosted app that migrates photos from **Google Drive** (organized in
+per-year folders) into **Google Photos** — with a database of tasks, a stoppable
+/ resumable worker, a REST API, a static progress UI, and a **question queue** for
+whenever a photo's year or location can't be confirmed automatically.
 
 ```
-Google Drive (year folders) ──► download ──► EXIF stamp (if needed) ──► upload ──► Google Photos
+Google Drive (year folders) ──► scan ──► resolve ──► download ──► EXIF stamp ──► upload ──► Google Photos
+                                   │         │
+                                   │         └─ can't confirm year/location? → question for the user
+                                   └─ every photo saved as a task row in SQLite
 ```
 
-- **Drive** — read-only. Lists sub-folders of a root folder and downloads the
-  images inside each.
-- **EXIF** — Google Photos has *no API field* for a photo's date or location; it
-  reads those from the file's embedded EXIF. So when a photo lacks a date/GPS,
-  the tool writes it into the JPEG before uploading. Camera-recorded metadata is
-  never overwritten.
-- **Photos** — append-only upload. Photos land in the real library normally.
-- **Manifest** — a local `manifest.json` records every uploaded Drive file so
-  re-runs skip finished work and don't create duplicates.
+## Why it's shaped this way
 
-## The one big caveat (2025 Google Photos API change)
+- **Tasks are defined first and persisted.** A *scan* walks the Drive folders and
+  writes one `item` row per photo. Nothing is downloaded during planning, so it's
+  fast and safe to re-run.
+- **Stoppable & rerunnable from the same state.** Every item's status is committed
+  to SQLite the instant it changes. Pause flips the job to `paused` and the worker
+  stops between items; start again and it resumes with the remaining work.
+  Uploaded photos are never re-uploaded (idempotent). If the process dies
+  mid-upload, the next start resets that one item and retries it.
+- **Questions when unsure.** If a folder name yields a confident year, its photos
+  go straight to `ready`. If not, a **blocking** year question is filed and those
+  photos wait in `needs_review`. A **non-blocking** location question is offered
+  per folder. Answering a year question promotes its photos to `ready`.
+- **Date/location via EXIF.** Google Photos has no API field for date or GPS — it
+  reads them from the file. So the app writes them into the JPEG before upload,
+  and only fills in what's missing (camera metadata is never overwritten).
 
-Since March 2025, a third-party app can only *see and manage media it uploaded
-itself* — the broad "read the whole library" scopes were removed. That's fine
-here because the tool **only uploads**. The consequence: the API can't tell us
-whether a photo already exists, so de-duplication relies on the local manifest
-(hence: keep `manifest.json`, and don't run two copies against the same account).
+## The 2025 Google Photos API note
+
+Since March 2025 a third-party app can only see media *it* uploaded. That's fine
+here (we only upload), but it means the API can't dedup for you — the SQLite task
+table is the source of truth for what's already done. Keep the `.db` file.
+
+## Stack
+
+Python · FastAPI + Uvicorn (one process serves the API *and* the static UI) ·
+SQLite · a background worker thread · vanilla-JS frontend (no build step).
 
 ## Setup
 
-1. **Create a Google Cloud project** and enable both **Google Drive API** and
-   **Google Photos Library API**.
-2. **Configure the OAuth consent screen** (External, "Testing" mode is fine).
-   Add yourself and your dad as **test users** — no Google verification review
-   needed while in testing.
-3. **Create an OAuth client** of type **Desktop app**, download the JSON, and
-   save it here as `credentials.json`.
-4. Install deps:
+1. Create a Google Cloud project; enable **Google Drive API** and **Google Photos
+   Library API**.
+2. Configure the OAuth consent screen (External, "Testing" is fine) and add
+   yourself + your dad as **test users** — no verification review needed.
+3. Create an OAuth client of type **Desktop app**, download the JSON, save it as
+   `credentials.json` in this folder.
+4. Install and run:
    ```bash
    cd photo-migration
    python -m venv .venv && source .venv/bin/activate
    pip install -r requirements.txt
+   python run.py                 # → http://127.0.0.1:8000
    ```
+   The first Drive/Photos call opens a browser for consent; the token is cached in
+   `token.json`.
 
-## Usage
+## Using it
 
-Find the **root folder ID** (the folder that *contains* the year folders) — it's
-the last path segment of the folder's URL in Drive.
+1. Open http://127.0.0.1:8000.
+2. **Create** a job with a name and the **root folder ID** (the folder that
+   *contains* the year folders — it's the last segment of the folder's Drive URL).
+3. **Scan** — populates the task list and any questions.
+4. Answer open **questions** (year is required to date a folder's photos; location
+   is optional).
+5. **Start** — the worker downloads, stamps, and uploads. **Pause** any time;
+   **Start** again to resume. Progress, counts, and failures update live.
 
-```bash
-# Safe: lists + downloads + stamps, but uploads nothing.
-python main.py --root-folder-id <ROOT_FOLDER_ID> --dry-run
+## REST API
 
-# Real run, but stop after 5 uploads to sanity-check the result in Photos.
-python main.py --root-folder-id <ROOT_FOLDER_ID> --limit 5
+| Method | Path | Purpose |
+|--------|------|---------|
+| `GET`  | `/api/jobs` | List jobs |
+| `POST` | `/api/jobs` | Create a job `{name, root_folder_id}` |
+| `GET`  | `/api/jobs/{id}` | Job + progress summary |
+| `POST` | `/api/jobs/{id}/scan` | Plan tasks (background) |
+| `POST` | `/api/jobs/{id}/start` | Start / resume the worker |
+| `POST` | `/api/jobs/{id}/pause` | Stop after the current item |
+| `GET`  | `/api/jobs/{id}/items?status=` | List photo tasks |
+| `GET`  | `/api/jobs/{id}/questions?status=open` | Open questions |
+| `POST` | `/api/questions/{id}/answer` | Answer `{year}` / `{skip}` / `{lat,lng}` / `{none}` |
 
-# One specific year.
-python main.py --root-folder-id <ROOT_FOLDER_ID> --only-year 2003
-
-# Full run (resumable — safe to Ctrl-C and re-run).
-python main.py --root-folder-id <ROOT_FOLDER_ID>
-```
-
-First run opens a browser for consent; the token is cached in `token.json`.
-
-## Customizing date/location rules
-
-Everything you'd want to change lives in **`migrate/exif.py`**, in two clearly
-marked hook functions:
-
-- `decide_datetime(file)` — what date to stamp. Default: parse a 4-digit year
-  from the folder name and use Jan 1 of that year. Replace with filename parsing,
-  a lookup table, per-folder overrides, etc.
-- `decide_gps(file)` — what coordinates to stamp. Default: none. Fill in your own
-  mapping (e.g. read a CSV of folder → lat/long).
-
-Both receive the `DriveFile` (which carries `name` and `parent_name`), so you
-have the filename and folder to base decisions on.
-
-## Files
+## Layout
 
 | Path | Role |
 |------|------|
-| `migrate/auth.py` | OAuth flow, returns Drive + Photos clients |
-| `migrate/drive.py` | List folders / images, download bytes |
-| `migrate/exif.py` | **Date/location hooks** + EXIF read/write |
-| `migrate/photos.py` | Two-step Photos upload |
-| `migrate/manifest.py` | Resumable dedup ledger |
-| `migrate/cli.py` | Orchestration + CLI flags |
-| `main.py` | Entry point |
+| `app/api.py` | FastAPI app: REST endpoints + static mount |
+| `app/db.py` | SQLite schema + all persistence (the resumable state) |
+| `app/planner.py` | Scan + year resolution + question generation |
+| `app/worker.py` | Stoppable/resumable background execution |
+| `app/answers.py` | Applies user answers, promotes photos to `ready` |
+| `app/exif.py` | EXIF date/GPS stamping (fills only what's missing) |
+| `app/drive.py` | Drive listing + download |
+| `app/photos.py` | Two-step Google Photos upload |
+| `app/auth.py` | OAuth flow → Drive + Photos clients |
+| `frontend/` | Static progress UI (index.html / app.js / style.css) |
+| `run.py` | Launches Uvicorn |
 
 ## Not committed
 
-`credentials.json`, `token.json`, and `manifest.json` are git-ignored — they hold
-secrets and per-account state.
+`credentials.json`, `token.json`, and `photo_migration.db*` are git-ignored — they
+hold secrets and per-account state.
+
+## Tuning date/location rules
+
+The default folder-year date is Jan 1 at noon (`DEFAULT_MONTH/DAY/HOUR` in
+`app/config.py`), and folder-name year parsing lives in `app/planner.py`
+(`parse_year`). Adjust either to taste.

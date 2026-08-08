@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photo Migration</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Drive &rarr; Photos Migration</h1>
+    <p class="sub">Plan, run, pause and resume photo migrations. Answer the questions when a year or location can't be confirmed.</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Jobs</h2>
+      <form id="create-form" class="row">
+        <input id="job-name" placeholder="Job name (e.g. Dad's photos)" required />
+        <input id="root-folder" placeholder="Drive root folder ID" required />
+        <button type="submit">Create</button>
+      </form>
+      <ul id="job-list" class="job-list"></ul>
+    </section>
+
+    <section class="panel" id="detail" hidden>
+      <div class="detail-head">
+        <h2 id="detail-title">Job</h2>
+        <span id="status-badge" class="badge">—</span>
+      </div>
+
+      <div class="controls">
+        <button id="btn-scan">Scan</button>
+        <button id="btn-start">Start / Resume</button>
+        <button id="btn-pause">Pause</button>
+      </div>
+
+      <div class="progress">
+        <div class="bar"><div id="bar-fill" class="bar-fill"></div></div>
+        <div id="progress-text" class="progress-text">No items yet — run a scan.</div>
+      </div>
+
+      <div id="counts" class="counts"></div>
+
+      <h3>Open questions <span id="q-count" class="pill">0</span></h3>
+      <div id="questions" class="questions"></div>
+
+      <h3>Recent failures</h3>
+      <div id="failures" class="failures"><span class="muted">None.</span></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

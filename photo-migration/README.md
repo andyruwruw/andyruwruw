@@ -38,8 +38,10 @@ table is the source of truth for what's already done. Keep the `.db` file.
 
 ## Stack
 
-Python · FastAPI + Uvicorn (one process serves the API *and* the static UI) ·
-SQLite · a background worker thread · vanilla-JS frontend (no build step).
+TypeScript · Node.js · Express (one process serves the API *and* the static UI) ·
+SQLite (better-sqlite3) · an async background worker · vanilla-JS frontend
+(no build step). Google via `googleapis` + `@google-cloud/local-auth`; EXIF via
+`piexifjs`.
 
 ## Setup
 
@@ -52,12 +54,13 @@ SQLite · a background worker thread · vanilla-JS frontend (no build step).
 4. Install and run:
    ```bash
    cd photo-migration
-   python -m venv .venv && source .venv/bin/activate
-   pip install -r requirements.txt
-   python run.py                 # → http://127.0.0.1:8000
+   npm install
+   npm run dev                   # → http://127.0.0.1:8000  (or: npm run build && npm start)
    ```
    The first Drive/Photos call opens a browser for consent; the token is cached in
    `token.json`.
+
+Run the end-to-end test (Google faked, no network) with `npm test`.
 
 ## Using it
 
@@ -88,25 +91,26 @@ SQLite · a background worker thread · vanilla-JS frontend (no build step).
 
 | Path | Role |
 |------|------|
-| `app/api.py` | FastAPI app: REST endpoints + static mount |
-| `app/db.py` | SQLite schema + all persistence (the resumable state) |
-| `app/planner.py` | Scan + year resolution + question generation |
-| `app/worker.py` | Stoppable/resumable background execution |
-| `app/answers.py` | Applies user answers, promotes photos to `ready` |
-| `app/exif.py` | EXIF date/GPS stamping (fills only what's missing) |
-| `app/drive.py` | Drive listing + download |
-| `app/photos.py` | Two-step Google Photos upload |
-| `app/auth.py` | OAuth flow → Drive + Photos clients |
+| `src/api.ts` | Express app: REST endpoints + static mount |
+| `src/server.ts` | Entry point (init DB, listen) |
+| `src/db.ts` | SQLite schema + all persistence (the resumable state) |
+| `src/planner.ts` | Scan + year resolution + question generation |
+| `src/worker.ts` | Stoppable/resumable background execution |
+| `src/answers.ts` | Applies user answers, promotes photos to `ready` |
+| `src/exif.ts` | EXIF date/GPS stamping (fills only what's missing) |
+| `src/drive.ts` | Drive listing + download |
+| `src/photos.ts` | Two-step Google Photos upload |
+| `src/auth.ts` | OAuth flow → Drive + Photos clients |
 | `frontend/` | Static progress UI (index.html / app.js / style.css) |
-| `run.py` | Launches Uvicorn |
+| `scripts/e2e.ts` | End-to-end test with Google faked |
 
 ## Not committed
 
-`credentials.json`, `token.json`, and `photo_migration.db*` are git-ignored — they
-hold secrets and per-account state.
+`credentials.json`, `token.json`, `photo_migration.db*`, `node_modules/`, and
+`dist/` are git-ignored — they hold secrets, per-account state, or build output.
 
 ## Tuning date/location rules
 
 The default folder-year date is Jan 1 at noon (`DEFAULT_MONTH/DAY/HOUR` in
-`app/config.py`), and folder-name year parsing lives in `app/planner.py`
-(`parse_year`). Adjust either to taste.
+`src/config.ts`), and folder-name year parsing lives in `src/planner.ts`
+(`parseYear`). Adjust either to taste.

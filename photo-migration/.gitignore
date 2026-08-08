@@ -5,8 +5,7 @@ photo_migration.db
 photo_migration.db-wal
 photo_migration.db-shm
 
-# Python
-__pycache__/
-*.pyc
-.venv/
-venv/
+# Node
+node_modules/
+dist/
+*.log
